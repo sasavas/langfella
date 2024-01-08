@@ -1,0 +1,44 @@
+
+@media (min-width:720px){
+    .app_body{
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        overflow: hidden;
+        align-items: center;
+        justify-content: center;
+    
+        .app_container{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            width: 640px;
+            max-width: 640px;
+        }
+    }
+}
+
+@media (max-width:720px) {
+    .app_body{
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        overflow: hidden;
+        align-items: center;
+        justify-content: center;
+    
+        .app_container{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+}

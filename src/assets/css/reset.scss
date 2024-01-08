@@ -1,0 +1,71 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+@charset "utf8";
+
+strong {font-weight:900;}
+
+*{
+    box-sizing: border-box;
+}
+
+html, body, div, span, applet, object, iframe, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, img, ins, kbd, q, s, samp,
+small, strike, sub, sup, tt, var, center,
+dl, dt, dd, ol, ul, li, p,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+		 
+}
+
+html, body {
+height:100%;
+width: 100%;
+color: var(--shade-1);
+position: relative;
+font-family: 'Roboto', 'sans-serif';
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+width: 8px;
+}
+
+::-webkit-scrollbar:horizontal{
+    height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+background-color: var(background-3);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+border: 1px solid transparent;
+background-clip: content-box;
+border-radius: 4px;
+background-color: rgba(122, 122, 122, 0.25);
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+border-radius: 4px;
+background-color: rgba(122, 122, 122, 0.25);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background-color: rgba(122, 122, 122, 0.5);
+}

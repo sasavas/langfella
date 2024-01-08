@@ -1,0 +1,29 @@
+@media (min-width:720px){
+    .header{
+        height: 64px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .logo{
+        display: flex;
+        height: 48px;
+        width: auto;
+    }
+}
+
+
+@media (max-width:720px) {
+    .header{
+        padding: 0 20px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .logo{
+        display: flex;
+        height: 48px;
+        width: auto;
+    }
+}

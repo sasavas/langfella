@@ -1,0 +1,24 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input [(ngModel)]= "email" type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+               placeholder="Ex. pat@example.com">
+        <mat-hint></mat-hint>
+        @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+          <mat-error>Please enter a valid email address</mat-error>
+        }
+        @if (emailFormControl.hasError('required')) {
+          <mat-error>Email is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>password</mat-label>
+        <input [(ngModel)]= "password" type="password" matInput [formControl]="passFormControl" [errorStateMatcher]="matcher"
+               placeholder="Ex. pat@example.com">
+        <mat-hint></mat-hint>
+        @if (emailFormControl.hasError('required')) {
+          <mat-error>Password is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+</form>

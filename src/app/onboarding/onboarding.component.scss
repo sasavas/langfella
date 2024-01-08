@@ -1,0 +1,14 @@
+:host{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+
+    app-logo-basic{
+        height: 240px;
+    }
+}
