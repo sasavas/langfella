@@ -13,6 +13,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './main-screen.component.scss',
 })
 export class MainScreenComponent {
+  articles: Article[] = [];
   constructor(
     private articleService: ArticleService,
     private authService: AuthService
@@ -23,7 +24,7 @@ export class MainScreenComponent {
 
   ngOnInit(): void {
     this.articleService.getArticles().subscribe((response) => {
-      console.log(response);
+      this.articles = response;
     });
   }
 

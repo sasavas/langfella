@@ -4,7 +4,8 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, exhaustMap, Observable, take } from 'rxjs';
+import { exhaustMap, Observable, take } from 'rxjs';
+import { Router } from '@angular/router';
 import { Article } from '../models/articles';
 import { AuthService } from './auth.service';
 
@@ -12,21 +13,26 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class ArticleService {
-  listOfArticles = new BehaviorSubject<Article[]>(null);
+  private url = 'https://aldaci-langfella-api.azurewebsites.net/Articles';
+
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getArticles(): Observable<Article[]> {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.authService.token}`,
+    });
+
     let request = {
-      url: 'https://aldaci-langfella-api.azurewebsites.net/Articles',
+      url: this.url,
+      headers: headers,
     };
     return this.authService.user.pipe(
       take(1),
       exhaustMap((user) => {
-        let headers = new HttpHeaders({
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${user?.jwt}`,
+        return this.http.get<Article[]>(request.url, {
+          headers: request.headers,
         });
-        return this.http.get<Article[]>(request.url, { headers: headers });
       })
     );
   }

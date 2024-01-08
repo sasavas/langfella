@@ -9,12 +9,9 @@
         Article List
     </div>
     <div class="ls_list">
-        <app-reading-list-item [title]="title" [type]="2"></app-reading-list-item>
-        <app-reading-list-item [title]="title" [type]="2"></app-reading-list-item>
-        <app-reading-list-item [title]="title" [type]="2"></app-reading-list-item>
-        <app-reading-list-item [title]="title" [type]="2"></app-reading-list-item>
-        <app-reading-list-item [title]="title" [type]="2"></app-reading-list-item>
-        <app-reading-list-item [title]="title" [type]="2"></app-reading-list-item>
+        @for (article of articles; track $index) {
+            <app-reading-list-item [article]="article"></app-reading-list-item>
+        }
     </div>
 </div>
 
