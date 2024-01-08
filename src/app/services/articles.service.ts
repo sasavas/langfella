@@ -6,7 +6,7 @@ import {
 import { Injectable } from '@angular/core';
 import { exhaustMap, Observable, take } from 'rxjs';
 import { Router } from '@angular/router';
-import { Article } from '../models/articles';
+import { Article, DetailedArticle } from '../models/articles';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -23,17 +23,27 @@ export class ArticleService {
       Authorization: `Bearer ${this.authService.token}`,
     });
 
-    let request = {
+    var request = {
       url: this.url,
       headers: headers,
     };
-    return this.authService.user.pipe(
-      take(1),
-      exhaustMap((user) => {
-        return this.http.get<Article[]>(request.url, {
-          headers: request.headers,
-        });
-      })
-    );
+
+    return this.http.get<Article[]>(request.url, { headers: request.headers });
+  }
+
+  getArticle(id: string): Observable<DetailedArticle> {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.authService.token}`,
+    });
+
+    var request = {
+      url: this.url + '/' + id,
+      headers: headers,
+    };
+
+    return this.http.get<DetailedArticle>(request.url, {
+      headers: request.headers,
+    });
   }
 }

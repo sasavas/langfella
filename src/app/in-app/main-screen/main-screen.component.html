@@ -10,7 +10,7 @@
     </div>
     <div class="ls_list">
         @for (article of articles; track $index) {
-            <app-reading-list-item [article]="article"></app-reading-list-item>
+            <app-reading-list-item (click)="goToArticle(article.id)" [article]="article"></app-reading-list-item>
         }
     </div>
 </div>

@@ -4,6 +4,7 @@ import { LogoBasicComponent } from '../../logo-basic/logo-basic.component';
 import { Article } from '../../models/articles';
 import { ArticleService } from '../../services/articles.service';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-screen',
@@ -15,6 +16,7 @@ import { AuthService } from '../../services/auth.service';
 export class MainScreenComponent {
   articles: Article[] = [];
   constructor(
+    private router: Router,
     private articleService: ArticleService,
     private authService: AuthService
   ) {}
@@ -24,8 +26,13 @@ export class MainScreenComponent {
 
   ngOnInit(): void {
     this.articleService.getArticles().subscribe((response) => {
+      console.log(response);
       this.articles = response;
     });
+  }
+
+  goToArticle(id: any) {
+    this.router.navigate(['app/read/' + id]);
   }
 
   logout() {
