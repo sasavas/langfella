@@ -1,1 +1,40 @@
-<p>sign-up works!</p>
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>Username</mat-label>
+        <input [(ngModel)]= "username" type="text" matInput [formControl]="unameFormControl" [errorStateMatcher]="matcher"
+               placeholder="Ex. pat@example.com">
+        <mat-hint></mat-hint>
+        @if (unameFormControl.hasError('required')) {
+          <mat-error>Username is <strong>required</strong></mat-error>
+        }
+        @if (unameFormControl.hasError('minlength')) {
+            <mat-error>At least <strong>4</strong> character long</mat-error>
+          }
+      </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input [(ngModel)]= "email" type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+               placeholder="Ex. pat@example.com">
+        <mat-hint></mat-hint>
+        @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+          <mat-error>Please enter a valid email address</mat-error>
+        }
+        @if (emailFormControl.hasError('required')) {
+          <mat-error>Email is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>password</mat-label>
+        <input [(ngModel)]= "password" type="password" matInput [formControl]="passFormControl" [errorStateMatcher]="matcher"
+               placeholder="Ex. pat@example.com">
+        <mat-hint></mat-hint>
+        @if (passFormControl.hasError('required')) {
+          <mat-error>Password is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+      <button mat-raised-button class="ea_button bg_tertiary c_white" color="primary" (click)="submit()">Submit</button>
+</form>
+<div class="d-flex my-4">
+    <span>Already have a user?</span>
+    <a [routerLink]="['/onboarding/login']" routerLinkActive="router-link-active"  class="ms-auto">Login</a>
+</div>

@@ -1,2 +1,10 @@
-<app-logo-basic [type]="2"></app-logo-basic>
-<router-outlet></router-outlet>
+<div class="onboarding_cont">
+    @if (web) {
+        <div [routerLink]="['/']" routerLinkActive="router-link-active"  class="fs-6 d-flex clickable align-items-center w-100">
+            <mat-icon class="material-icons-outlined me-2" aria-hidden="false" aria-label="back to site" fontIcon="arrow_back"></mat-icon>
+            Back to the site
+        </div>
+    }
+    <app-logo-basic [type]="2"></app-logo-basic>
+    <router-outlet></router-outlet>
+</div>

@@ -39,3 +39,15 @@
     height: 48px;
     border-radius: 12px;
 }
+
+.example-form{
+    display: flex;
+    gap: 8px;
+    width: 320px;
+    flex-direction: column;
+
+    .ea_button{
+        width: 100%;
+        justify-content: center;
+    }
+}
