@@ -1,0 +1,11 @@
+:host{
+    font-family: 'Merriweather';
+    line-height: 1.75;
+
+    .chapter{
+        cursor: pointer;
+        &:hover{
+            color: var(--tertiary);
+        }
+    }
+}

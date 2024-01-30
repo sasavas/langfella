@@ -10,11 +10,31 @@
     padding: 16px;
 
     h4{
+        font-family: 'Merriweather';
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 2; /* number of lines to show */
                 line-clamp: 2; 
         -webkit-box-orient: vertical;
      
+    }
+
+    .level_word{
+        display: flex;
+
+        span{
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--shade-1);
+
+            .mat-icon{
+                width: 18px;
+                height: 18px;
+                font-size: 18px;
+            }
+        }
     }
 }

@@ -6,7 +6,34 @@
 
 <div class="list_section">
     <div class="ls_header">
-        Article List
+        Continue Reading
+        <span class="ms-auto">See more</span>
+    </div>
+    <div class="ls_list">
+        @for (article of articles; track $index) {
+            <app-reading-list-item (click)="goToArticle(article.id)" [article]="article"></app-reading-list-item>
+        }
+    </div>
+</div>
+
+<div class="list_section">
+    <div class="ls_header">
+        Library
+        <span class="ms-auto">See more</span>
+    </div>
+    <div class="ls_list">
+        @for (article of articles; track $index) {
+            <app-reading-list-item (click)="goToArticle(article.id)" [article]="article"></app-reading-list-item>
+        }
+    </div>
+</div>
+
+<div class="list_section">
+    <div class="ls_header">
+        Imported Contents 
+        <mat-icon class="material-icons-outlined ms-2 clickable" aria-hidden="false" fontIcon="add_circle_outline"></mat-icon>
+
+        <span class="ms-auto">See more</span>
     </div>
     <div class="ls_list">
         @for (article of articles; track $index) {

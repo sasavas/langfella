@@ -1,0 +1,46 @@
+:host {
+    background: var(--blue-dark);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .site_cont {
+        color: var(--white);
+        display: flex;
+        flex-direction: column;
+        width: 888px;
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-family: 'Merriweather';
+            }
+
+            .benefits {
+                gap: 16px;
+                margin: 32px 0;
+                display: flex;
+                flex-direction: column;
+
+                li {
+                    gap: 10px;
+                    display: flex;
+                    align-items: center;
+                }
+
+                .mat-icon {
+                    color: var(--white);
+                }
+            }
+        }
+    }
+}

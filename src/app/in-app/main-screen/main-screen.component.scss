@@ -1,5 +1,6 @@
 @media (min-width:720px){
     .list_section{
+        cursor: pointer;
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -23,6 +24,7 @@
 
 @media (max-width:720px) {
     .list_section{
+        cursor: pointer;
         display: flex;
         flex-direction: column;
         width: 100%;

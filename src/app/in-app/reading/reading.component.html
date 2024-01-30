@@ -1,8 +1,11 @@
-<h4 class="article_header"> {{article.title}} </h4>
+<h1 class="article_header my-4"> {{article.title}} </h1>
 
 @for (chapter of article.chapters; track $index) {
-    #{{$index}}
-    @if (chapter.contents) {
-        <p> {{chapter.contents[0].content}} </p>
-    }
+    <div class="mb-4 chapter">
+        <h2>#{{$index}} {{chapter.title}}</h2>
+
+        @if (chapter.contents) {
+            <p> {{chapter.contents[0].content}} </p>
+        }
+    </div>
 }

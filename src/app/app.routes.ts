@@ -7,8 +7,15 @@ import { OnboardingComponent } from './onboarding/onboarding.component';
 import { LoginComponent } from './onboarding/login/login.component';
 import { SignUpComponent } from './onboarding/sign-up/sign-up.component';
 import { ReadingComponent } from './in-app/reading/reading.component';
+import { SiteComponent } from './site/site.component';
 
 export const routes: Routes = [
+  {
+    path: '',
+    component: SiteComponent,
+    children: [
+    ],
+  },
   {
     path: 'app',
     component: InAppComponent,

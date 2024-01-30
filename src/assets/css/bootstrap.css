@@ -10909,4 +10909,7 @@ textarea.form-control-lg {
   }
 }
 
+.clickable{
+  cursor: pointer;
+}
 /*# sourceMappingURL=bootstrap.css.map */

@@ -1,0 +1,33 @@
+:host {
+    display: flex;
+    padding: 32px 0px;
+    color: var(--white);
+    width: 100%;
+
+    nav {
+        display: flex;
+        gap: 20px;
+        height: 64px;
+        align-items: center;
+        margin-left: auto;
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--white);
+
+        &.site-button {
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            height: 48px;
+            border-radius: 12px;
+            border: 1px solid var(--white);
+        }
+    }
+
+    app-logo-basic {
+        height: 64px;
+        width: auto;
+    }
+}

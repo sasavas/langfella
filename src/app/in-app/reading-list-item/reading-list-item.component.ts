@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Article } from '../../models/articles';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-reading-list-item',
   standalone: true,
-  imports: [],
+  imports: [MatIconModule],
   templateUrl: './reading-list-item.component.html',
   styleUrl: './reading-list-item.component.scss',
 })

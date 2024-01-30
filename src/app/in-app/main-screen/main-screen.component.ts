@@ -5,11 +5,12 @@ import { Article } from '../../models/articles';
 import { ArticleService } from '../../services/articles.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-main-screen',
   standalone: true,
-  imports: [ReadingListItemComponent, LogoBasicComponent],
+  imports: [ReadingListItemComponent, LogoBasicComponent, MatIconModule],
   templateUrl: './main-screen.component.html',
   styleUrl: './main-screen.component.scss',
 })

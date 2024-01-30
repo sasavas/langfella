@@ -1,12 +1,21 @@
-:root{
+:root {
+    --tertiary: #909568;
     --primary: #84644D;
     --primary-light: #F2E4D3;
-
+    --blue-dark: #1C2A3F;
     --background-0: #F9F1E9;
     --background-1: #F9F5F2;
     --background-2: #FFFCFB;
     --background-3: #FFFFFF;
     --shade-1: #2E1502;
-
+    --white: #FFFFFF;
     --separation-1: rgba(0, 0, 0, .1);
+}
+
+.bg_tertiary {
+    background: var(--tertiary);
+}
+
+.c_white{
+    color: var(--white);
 }

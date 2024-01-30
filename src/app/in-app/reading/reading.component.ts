@@ -27,6 +27,7 @@ export class ReadingComponent {
         .getArticle(response['articleId'])
         .subscribe((response) => {
           this.article = response;
+          console.log(response);
         });
     });
   }
