@@ -1,7 +1,7 @@
 <app-logo-basic [type]="3"></app-logo-basic>
 
 <nav>
-    <a href="">Help Center</a>
-    <a href="">Contact</a>
-    <a class="site-button" href="">Upgrade Pro</a>
+    <a [routerLink]="['/lobby/login']">Login</a>
+    <a [routerLink]="['/lobby/signup']" routerLinkActive="router-link-active" >Sign up</a>
+    <a class="site-button" href="">Get Started</a>
 </nav>

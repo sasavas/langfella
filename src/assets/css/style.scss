@@ -38,6 +38,31 @@
     align-items: center;
     height: 48px;
     border-radius: 12px;
+
+    &.btn_sm{
+        font-size: 14px;
+        padding: 0 12px;
+        height: 32px;
+    }
+
+    &.btn_md{
+        height: 48px;
+        padding: 0 16px;
+    }
+
+    &.btn_lg{
+        font-weight: 400;
+        font-size: 20px;
+        height: 64px;
+        padding: 0 24px;
+    }
+
+    &.btn_hg{
+        font-weight: 400;
+        font-size: 24px;
+        height: 96px;
+        padding: 0 32px;
+    }
 }
 
 .example-form{

@@ -1,44 +1,156 @@
-:host {
-    background: var(--blue-dark);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .site_cont {
-        color: var(--white);
+@media (min-width:720px) {
+    :host {
+        background: var(--blue-dark);
+        width: 100%;
+        height: 100%;
         display: flex;
         flex-direction: column;
-        width: 888px;
-
-        .hero {
+        align-items: center;
+    
+        .site_cont {
+            flex: 1;
+            color: var(--white);
             display: flex;
             flex-direction: column;
+            width: calc(100% - 128px);
+    
+            .hero {
+                display: flex;
+    
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
+                    font-family: 'Merriweather';
+                }
+    
+                .hero_content{
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    background: var(--white);
+                    padding: 48px;
+                    color: var(--blue-dark);
+                }
+    
+                .hero_img{
+                    display: flex;
+                    flex: 1;
+                    align-items: end;
+    
+                    img{
+                        object-fit: cover;
+                        width: 100%;
+                        height: auto;
+                    }
+    
+                    svg{
+                        width: 100%;
+                        height: auto;
+                    }
+                }
+    
+                .benefits {
+                    gap: 24px;
+                    margin: 48px 0;
+                    display: flex;
+                    flex-direction: column;
+                    
+                    h5{
+                        font-weight: 400;
+                        font-family: 'Roboto';
+                        margin-bottom: 0;
+                    }
 
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-                font-family: 'Merriweather';
+                    li {
+                        gap: 10px;
+                        display: flex;
+                        align-items: center;
+                    }
+    
+                    .mat-icon {
+                        // color: var(--white);
+                    }
+                }
             }
+        }
+    }
+}
 
-            .benefits {
-                gap: 16px;
-                margin: 32px 0;
+@media (max-width:720px) {
+    :host {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+        .site_cont {
+            background: var(--blue-dark);
+            flex: 1;
+            color: var(--white);
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+
+            .hero {
                 display: flex;
                 flex-direction: column;
-
-                li {
-                    gap: 10px;
-                    display: flex;
-                    align-items: center;
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
+                    font-family: 'Merriweather';
                 }
+    
+                .hero_content{
+                    flex-direction: column;
+                    background: var(--white);
+                    padding: 32px;
+                    color: var(--blue-dark);
+                }
+    
+                .hero_img{
+                    display: flex;
+    
+                    img{
+                        object-fit: cover;
+                        width: 100%;
+                        height: auto;
+                    }
+    
+                    svg{
+                        width: 100%;
+                        height: auto
+                    }
+                }
+    
+                .benefits {
+                    gap: 24px;
+                    margin: 48px 0;
+                    display: flex;
+                    flex-direction: column;
+                    
+                    h5{
+                        font-weight: 400;
+                        font-family: 'Roboto';
+                        margin-bottom: 0;
+                    }
 
-                .mat-icon {
-                    color: var(--white);
+                    li {
+                        gap: 10px;
+                        display: flex;
+                        align-items: center;
+                    }
+    
+                    .mat-icon {
+                        // color: var(--white);
+                    }
                 }
             }
         }

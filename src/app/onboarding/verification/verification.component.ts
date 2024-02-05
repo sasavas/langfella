@@ -12,6 +12,7 @@ import { Router, RouterLink } from '@angular/router';
 export class VerificationComponent {
   verifyId: any = ""
   error: string = "";
+  loading: boolean = false;
 
   constructor(
 		private route: ActivatedRoute,
@@ -21,15 +22,20 @@ export class VerificationComponent {
 
 
   ngOnInit(): void {
+    this.loading = true;
     this.route.params.subscribe(params => {
       this.verifyId = params['verifyId'];
       this.authService.verify(this.verifyId).subscribe({
         next: (response) => {
           this.router.navigate(['/app'])
+          this.loading = false;
+          console.log(response);
         },
         error: (err) => {
           //TO DO: SWITCH CASE ALL ERRORS
+          console.log(err);
           this.error = err;
+          this.loading = false;
         }
       })
     });
