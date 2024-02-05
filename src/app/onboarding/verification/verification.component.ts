@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { AuthService } from '../../services/auth.service';
+import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-verification',
   standalone: true,
@@ -10,16 +11,27 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class VerificationComponent {
   verifyId: any = ""
+  error: string = "";
 
   constructor(
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router
 	) { }
 
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.verifyId = params['verifyId'];
-      console.log(this.verifyId)
+      this.authService.verify(this.verifyId).subscribe({
+        next: (response) => {
+          this.router.navigate(['/app'])
+        },
+        error: (err) => {
+          //TO DO: SWITCH CASE ALL ERRORS
+          this.error = err;
+        }
+      })
     });
   }
 
