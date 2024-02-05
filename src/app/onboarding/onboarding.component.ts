@@ -26,7 +26,7 @@ export class OnboardingComponent {
       if(this.isAuthenticated){
         this.router.navigate(['/app'])
       }else{
-        // this.router.navigate(['onboarding/login'])
+        // this.router.navigate(['lobby/login'])
       }
     });
     

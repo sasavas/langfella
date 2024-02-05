@@ -8,6 +8,7 @@ import { LoginComponent } from './onboarding/login/login.component';
 import { SignUpComponent } from './onboarding/sign-up/sign-up.component';
 import { ReadingComponent } from './in-app/reading/reading.component';
 import { SiteComponent } from './site/site.component';
+import { VerificationComponent } from './onboarding/verification/verification.component';
 
 export const routes: Routes = [
   {
@@ -29,11 +30,12 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'onboarding',
+    path: 'lobby',
     component: OnboardingComponent,
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignUpComponent },
+      { path: 'verification/:verifyId', component: VerificationComponent }
     ],
   },
 ];

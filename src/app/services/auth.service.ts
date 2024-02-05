@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Subject, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
@@ -35,7 +35,7 @@ export class AuthService {
   logout() {
     this.user.next(null);
     localStorage.removeItem('user');
-    this.router.navigate(['../onboarding/']);
+    this.router.navigate(['../lobby/']);
   }
 
   login(email: string, password: string) {
@@ -50,6 +50,29 @@ export class AuthService {
         }),
         catchError(this.rhandleError)
       );
+  }
+
+  signup(email: string, password: string, userName: string,){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    let user = {
+      email,
+      password: password,
+      languageCode: "en",
+      userName,
+    }
+
+    var request = {
+      url: this.registerlink,
+      headers: headers,
+    };
+
+    console.log(user);
+    let a = this.http.post<any>(request.url, user, { headers: request.headers });
+    console.log(a);
+    return a
   }
 
   // loadStyle(theme?:any): void {

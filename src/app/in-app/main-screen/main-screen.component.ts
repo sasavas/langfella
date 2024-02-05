@@ -6,15 +6,17 @@ import { ArticleService } from '../../services/articles.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { ImportArticlesComponent } from '../import-articles/import-articles.component';
 
 @Component({
   selector: 'app-main-screen',
   standalone: true,
-  imports: [ReadingListItemComponent, LogoBasicComponent, MatIconModule],
+  imports: [ReadingListItemComponent, LogoBasicComponent, MatIconModule, ImportArticlesComponent],
   templateUrl: './main-screen.component.html',
   styleUrl: './main-screen.component.scss',
 })
 export class MainScreenComponent {
+  showImportArticle: boolean = false;
   articles: Article[] = [];
   constructor(
     private router: Router,
@@ -30,6 +32,14 @@ export class MainScreenComponent {
       console.log(response);
       this.articles = response;
     });
+  }
+
+  toggleShowImportArticle(){
+    if(this.showImportArticle == true){
+      this.showImportArticle = false
+    }else{
+      this.showImportArticle = true
+    }
   }
 
   goToArticle(id: any) {

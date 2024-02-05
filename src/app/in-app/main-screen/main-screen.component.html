@@ -4,10 +4,14 @@
     <div (click)="logout()" class="logout clickable ms-auto">logout</div>
 </div>
 
+@if (showImportArticle) {
+    <app-import-articles></app-import-articles>
+}
+
 <div class="list_section">
     <div class="ls_header">
         Continue Reading
-        <span class="ms-auto">See more</span>
+        <span class="ms-auto clickable">See more</span>
     </div>
     <div class="ls_list">
         @for (article of articles; track $index) {
@@ -19,7 +23,7 @@
 <div class="list_section">
     <div class="ls_header">
         Library
-        <span class="ms-auto">See more</span>
+        <span class="ms-auto clickable">See more</span>
     </div>
     <div class="ls_list">
         @for (article of articles; track $index) {
@@ -31,9 +35,9 @@
 <div class="list_section">
     <div class="ls_header">
         Imported Contents 
-        <mat-icon class="material-icons-outlined ms-2 clickable" aria-hidden="false" fontIcon="add_circle_outline"></mat-icon>
+        <mat-icon (click)="toggleShowImportArticle()" class="material-icons-outlined ms-2 clickable" aria-hidden="false" fontIcon="add_circle_outline"></mat-icon>
 
-        <span class="ms-auto">See more</span>
+        <span class="ms-auto clickable">See more</span>
     </div>
     <div class="ls_list">
         @for (article of articles; track $index) {

@@ -45,9 +45,9 @@ export class SignUpComponent {
   ){}
 
   submit(){
-    this.authService.login(this.email, this.password).subscribe({
+    this.authService.signup(this.email, this.password, this.username).subscribe({
       next: (response) => {
-        this.router.navigate(['/app'])
+        this.router.navigate(['/lobby/login'])
       },
       error: (err) => {
         //TO DO: SWITCH CASE ALL ERRORS
