@@ -8,6 +8,8 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class AuthService {
+  private verifyLink =
+    'https://aldaci-langfella-api.azurewebsites.net/Users/verify';
   private registerlink =
     'https://aldaci-langfella-api.azurewebsites.net/Users/register';
   private loginlink =
@@ -70,9 +72,23 @@ export class AuthService {
     };
 
     console.log(user);
-    let a = this.http.post<any>(request.url, user, { headers: request.headers });
-    console.log(a);
-    return a
+
+    return this.http.post<any>(request.url, user, { headers: request.headers });
+  }
+
+  verify(veridicationCode: string){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    var request = {
+      url: this.verifyLink,
+      headers: headers,
+    };
+
+    console.log(veridicationCode);
+    
+    return this.http.post<any>(request.url, veridicationCode, { headers: request.headers });
   }
 
   // loadStyle(theme?:any): void {

@@ -1,0 +1,16 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 248px;
+    min-width: 248px;
+    height: 180px;
+    background: var(--background-1);
+    border-radius: 16px;
+    padding: 16px;
+
+    .dialog_container{
+        padding: 32px;
+        background: var(--background-3);
+    }
+}
