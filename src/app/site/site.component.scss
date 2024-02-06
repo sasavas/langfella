@@ -80,6 +80,12 @@
     }
 }
 
+@media (max-width:980px) {
+    .hero_content{
+        zoom: .875;
+    }
+}
+
 @media (max-width:720px) {
     :host {
         width: 100%;
@@ -109,6 +115,7 @@
                 }
     
                 .hero_content{
+                    zoom: 1;
                     flex-direction: column;
                     background: var(--white);
                     padding: 32px;

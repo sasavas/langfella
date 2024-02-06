@@ -9,10 +9,10 @@
 }
 
 <div class="list_section">
-    <div class="ls_header">
+    <h5 class="ls_header">
         Continue Reading
         <span class="ms-auto clickable">See more</span>
-    </div>
+    </h5>
     <div class="ls_list">
         @for (article of articles; track $index) {
             <app-reading-list-item (click)="goToArticle(article.id)" [article]="article"></app-reading-list-item>
@@ -21,10 +21,10 @@
 </div>
 
 <div class="list_section">
-    <div class="ls_header">
+    <h5 class="ls_header">
         Library
         <span class="ms-auto clickable">See more</span>
-    </div>
+    </h5>
     <div class="ls_list">
         @for (article of articles; track $index) {
             <app-reading-list-item (click)="goToArticle(article.id)" [article]="article"></app-reading-list-item>
@@ -33,12 +33,12 @@
 </div>
 
 <div class="list_section">
-    <div class="ls_header">
+    <h5 class="ls_header">
         Imported Contents 
         <mat-icon (click)="toggleShowImportArticle()" class="material-icons-outlined ms-2 clickable" aria-hidden="false" fontIcon="add_circle_outline"></mat-icon>
 
         <span class="ms-auto clickable">See more</span>
-    </div>
+    </h5>
     <div class="ls_list">
         @for (article of articles; track $index) {
             <app-reading-list-item (click)="goToArticle(article.id)" [article]="article"></app-reading-list-item>
