@@ -1,2 +1,12 @@
-<p>import-articles works!</p>
-        <input [(ngModel)]="test" type="file" placeholder="Ex. pat@example.com">
+<div class="lang_modal">
+    <h5>Import EPUB</h5>
+    <div class="drop_cont">
+        <div class="file-drop-area">
+            <span class="fake-btn">Choose file</span>
+            <span class="file-msg">or drag and drop file here</span>
+            <input [(ngModel)]="test" class="file-input" multiple="false" accept=".epub" id="myFile" type="file">
+        </div>
+    </div>
+    <h5>Import HTML</h5>
+    <input [(ngModel)]="htmlUrl" type="url" placeholder="Ex. example.com">
+</div>

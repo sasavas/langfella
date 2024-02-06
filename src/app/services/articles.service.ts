@@ -14,6 +14,7 @@ import { AuthService } from './auth.service';
 })
 export class ArticleService {
   private url = 'https://aldaci-langfella-api.azurewebsites.net/Articles';
+  private epubUrl = 'https://aldaci-langfella-api.azurewebsites.net/Epub/importEpubBookFromFile'
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -29,6 +30,20 @@ export class ArticleService {
     };
 
     return this.http.get<Article[]>(request.url, { headers: request.headers });
+  }
+
+  importEpubFromFile(file:any): Observable<any>{
+    let headers = new HttpHeaders({
+      'Content-Type': 'multipart/form-data',
+      Authorization: `Bearer ${this.authService.token}`,
+    });
+
+    var request = {
+      url: this.epubUrl,
+      headers: headers,
+    };
+
+    return this.http.post<any>(request.url, file, { headers: request.headers });
   }
 
   getArticle(id: string): Observable<DetailedArticle> {
