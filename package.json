@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "watch": "ng build --watch --configuration development",
     "start": "node dist/langfella/server/server.mjs",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:Langfella": "node dist/langfella/server/server.mjs"
   },
