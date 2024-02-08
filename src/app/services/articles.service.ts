@@ -8,13 +8,14 @@ import { exhaustMap, Observable, take } from 'rxjs';
 import { Router } from '@angular/router';
 import { Article, DetailedArticle } from '../models/articles';
 import { AuthService } from './auth.service';
+import serverConfig from "./service-config"
 
 @Injectable({
   providedIn: 'root',
 })
 export class ArticleService {
-  private url = 'https://aldaci-langfella-api.azurewebsites.net/Articles';
-  private epubUrl = 'https://aldaci-langfella-api.azurewebsites.net/Epub/importEpubBookFromFile'
+  private getArticlesUrl = `${serverConfig.baseUrl}/Articles` as const;
+  private importEpubUrl = `${serverConfig.baseUrl}/Epub/importEpubBookFromFile` as const;
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -25,25 +26,25 @@ export class ArticleService {
     });
 
     var request = {
-      url: this.url,
+      url: this.getArticlesUrl,
       headers: headers,
     };
 
     return this.http.get<Article[]>(request.url, { headers: request.headers });
   }
 
-  importEpubFromFile(file:any): Observable<any>{
+  importEpubFromFile(formData:any): Observable<any>{
     let headers = new HttpHeaders({
-      'Content-Type': 'multipart/form-data',
+      //'Content-Type': 'multipart/form-data',
       Authorization: `Bearer ${this.authService.token}`,
     });
 
     var request = {
-      url: this.epubUrl,
+      url: this.importEpubUrl,
       headers: headers,
     };
 
-    return this.http.post<any>(request.url, file, { headers: request.headers });
+    return this.http.post<any>(request.url, formData, { headers: request.headers });
   }
 
   getArticle(id: string): Observable<DetailedArticle> {
@@ -53,7 +54,7 @@ export class ArticleService {
     });
 
     var request = {
-      url: this.url + '/' + id,
+      url: `${this.getArticlesUrl}/${id}`,
       headers: headers,
     };
 

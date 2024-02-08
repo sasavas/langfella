@@ -17,7 +17,7 @@ export class ImportArticlesComponent {
   constructor(
     private articleService: ArticleService,
   ) {}
-  
+
   ngOnInit(){
     let fileInput:any = document.getElementById('myFile')
     console.log(fileInput);
@@ -46,9 +46,10 @@ export class ImportArticlesComponent {
           droparea.css('background', 'var(--success-1)');
           droparea.css('color', 'white')
       }
-      let file = e.target.files[0]
-      console.log(file);
-      this.articleService.importEpubFromFile(file).subscribe((response) => {
+      const formData = new FormData();
+      formData.append('file', e.target.files[0]);
+
+      this.articleService.importEpubFromFile(formData).subscribe((response) => {
         console.log(response);
       });
     })

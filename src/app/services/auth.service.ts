@@ -3,17 +3,15 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Subject, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
+import serviceConfig from './service-config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private verifyLink =
-    'https://aldaci-langfella-api.azurewebsites.net/Users/verify';
-  private registerlink =
-    'https://aldaci-langfella-api.azurewebsites.net/Users/register';
-  private loginlink =
-    'https://aldaci-langfella-api.azurewebsites.net/Users/login';
+  private verifyLink = `${serviceConfig.baseUrl}/Users/verify`;
+  private registerlink = `${serviceConfig.baseUrl}/Users/register`;
+  private loginlink = `${serviceConfig.baseUrl}/Users/login`;
   user = new BehaviorSubject<User | null>(null);
 
   get token(): string {
@@ -87,7 +85,7 @@ export class AuthService {
     };
 
     console.log(veridicationCode);
-    
+
     return this.http.post<any>(request.url, veridicationCode, { headers: request.headers });
   }
 
