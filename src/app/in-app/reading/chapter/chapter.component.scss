@@ -1,0 +1,16 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    .p{
+        line-height: 1.8;
+        font-size: 18px;
+    }
+
+
+    .header{
+        position: sticky;
+        top: 0px;
+        padding: 0;
+    }
+    
+}

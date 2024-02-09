@@ -1,11 +1,48 @@
-<h1 class="article_header my-4"> {{article.title}} </h1>
+@if (!currentChapter) {
+    <div class="header">
+        <app-logo-basic class="logo"></app-logo-basic>
 
-@for (chapter of article.chapters; track $index) {
-    <div class="mb-4 chapter">
-        <h2>#{{$index}} {{chapter.title}}</h2>
-
-        @if (chapter.contents) {
-            <p> {{chapter.contents[0].content}} </p>
-        }
+        <div [routerLink]="['/app']" routerLinkActive="router-link-active"  class="logout clickable ms-auto">Back to home</div>
     </div>
+
+    <div class="d-flex">
+        <h1 class="article_header my-4"> {{article.title}} </h1>
+    </div>
+    
+    
+    @for (chapter of article.chapters; track $index) {
+        <div (click)="openChapter(chapter)" class="chapter">
+            <h2> #{{$index+1}} {{chapter.title}}</h2>
+    
+            @if (chapter.contents) {
+                @if (chapter.contents.length > 1) {
+                    <p> {{chapter.contents[0].content}} {{chapter.contents[1].content}} </p>
+                }
+                @if (chapter.contents.length == 1) {}
+                <p> {{chapter.contents[0].content}}</p>
+            }
+    
+            <div class="c_primary d-flex mt-1">
+                <span>
+                    Chapter
+                </span>
+    
+                <span class="ms-auto">
+                    1h 20m Read
+                </span>
+            </div>
+        </div>
+    }
 }
+
+
+@if (currentChapter) {
+    <app-chapter (closingEvent)="closeChapter()" [chapterData]="currentChapter"></app-chapter>
+}
+
+
+@if (loading) {
+    <app-loading></app-loading>
+}
+
+

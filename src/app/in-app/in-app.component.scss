@@ -1,5 +1,5 @@
 
-@media (min-width:720px){
+@media (min-width:912px){
     .app_body{
         position: absolute;
         left: 0;
@@ -10,18 +10,19 @@
         overflow: auto;
         align-items: center;
         justify-content: center;
-    
+        background: var(--background-2);
+
         .app_container{
             height: 100%;
             display: flex;
             flex-direction: column;
-            width: 640px;
-            max-width: 640px;
+            width:  720px;
+            max-width:  720px;
         }
     }
 }
 
-@media (max-width:720px) {
+@media (max-width:912px) {
     .app_body{
         position: absolute;
         left: 0;
@@ -32,6 +33,7 @@
         overflow: auto;
         align-items: center;
         justify-content: center;
+        background: var(--background-2);
     
         .app_container{
             height: 100%;

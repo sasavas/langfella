@@ -1,0 +1,20 @@
+@if (chapterData) {
+    <div class="header">
+        <app-logo-basic class="logo"></app-logo-basic>
+
+        <div (click)="close()" class="logout clickable ms-auto">Back to book</div>
+    </div>
+
+    <div class="d-flex">
+        @if (chapterData.title) {
+            <h1 class="article_header my-4"> {{chapterData.title}} </h1>
+        }@else {
+            <h1 class="article_header my-4"> Untitled Chapter </h1>
+        }
+        
+    </div>
+
+    @for (section of chapterData.contents; track $index) {
+        <div class="my-3 p"> {{section.content}} </div>
+    }
+}

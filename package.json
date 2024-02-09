@@ -23,6 +23,7 @@
     "@angular/platform-server": "^17.0.0",
     "@angular/router": "^17.0.0",
     "@angular/ssr": "^17.0.3",
+    "@lottiefiles/lottie-player": "^2.0.3",
     "express": "^4.18.2",
     "jquery": "^3.7.1",
     "rxjs": "~7.8.0",

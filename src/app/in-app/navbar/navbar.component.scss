@@ -1,5 +1,5 @@
 
-@media (min-width:720px){
+@media (min-width:912px){
     :host{
         position: absolute;
         display: flex;
@@ -8,7 +8,7 @@
         bottom: 0;
         left: 0;
         top: 0;
-        width: 64px;
+        width: 80px;
         background: var(--background-1);
         font-size: 12px;
         gap: 12px;
@@ -20,16 +20,25 @@
             flex-direction: column;
             padding: 4px 4px 7px 4px;
             gap: 4px;
+            cursor: pointer;
     
             .icon{
+                width: 64px;
+                display: flex;
+                justify-content: center;
                 padding: 4px;
+                border-radius: 16px;
+            }
+
+            &:hover{
+                .icon{background: var(--primary-light);}
             }
         }
     }
 }
 
 
-@media (max-width:720px) {
+@media (max-width:912px) {
     :host{
         border-top: 1px solid var(--separation-1);
         position: absolute;
@@ -40,6 +49,7 @@
         right: 0;
         height: 80px;
         background: var(--background-1);
+        padding: 0 8px;
     }
 
     .nav_item{
@@ -50,8 +60,18 @@
         padding: 4px 4px 7px 4px;
         gap: 4px;
 
+        cursor: pointer;
+
         .icon{
+            width: 64px;
+            display: flex;
+            justify-content: center;
             padding: 4px;
+            border-radius: 16px;
+        }
+
+        &:hover{
+            .icon{background: var(--primary-light);}
         }
     }
 }
