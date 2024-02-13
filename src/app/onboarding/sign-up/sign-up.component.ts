@@ -52,7 +52,7 @@ export class SignUpComponent {
       error: (err) => {
         //TO DO: SWITCH CASE ALL ERRORS
         this.error = err;
-        this.clear();
+        alert(err);
       }
     })
     }
