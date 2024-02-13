@@ -27,6 +27,13 @@ export class ChapterComponent {
   }
   
   ngAfterViewInit(){
+
+    $(".lang-cont").each(function(){
+      this.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+      });
+    });
+
     $('.lang-cont').on("click touchstart", (e) => {
       let s = window.getSelection();
       if (s && s.anchorNode && s.toString().length > 0) {
@@ -86,7 +93,13 @@ export class ChapterComponent {
     });
   }
 
+
+
+
   closeTranslate(){
+    if(window.getSelection){
+      window.getSelection()?.removeAllRanges();
+    }
     this.translation = null;
   }
 }
