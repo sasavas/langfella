@@ -1,5 +1,6 @@
 <div class="lang_modal">
-    <h5>Import EPUB</h5>
+    <h4 class="d-flex align-items-center mb-4">Import Content <mat-icon (click)="close()" class="material-icons-outlined ms-auto clickable" aria-hidden="false" fontIcon="close"></mat-icon></h4>
+    <h6>EPUB</h6>
     <div class="drop_cont">
         <div class="file-drop-area">
             <span class="fake-btn">Choose file</span>
@@ -7,6 +8,11 @@
             <input [(ngModel)]="test" class="file-input" multiple="false" accept=".epub" id="myFile" type="file">
         </div>
     </div>
-    <h5>Import HTML</h5>
+    <h6>HTML</h6>
     <input [(ngModel)]="htmlUrl" type="url" placeholder="Ex. example.com">
+
+    @if (loading) {
+        <app-loading></app-loading>
+    }
+
 </div>

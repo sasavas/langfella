@@ -1,21 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import $ from 'jquery';
 import { ArticleService } from '../../services/articles.service';
+import { MatIconModule } from '@angular/material/icon';
+import { Router, RouterLink } from '@angular/router';
+import { LoadingComponent } from '../../loading/loading.component';
+
 
 @Component({
   selector: 'app-import-articles',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, MatIconModule, LoadingComponent],
   templateUrl: './import-articles.component.html',
   styleUrl: './import-articles.component.scss'
 })
 export class ImportArticlesComponent {
   test: any = "";
   htmlUrl: any = "";
+  error: string = "";
+  loading: boolean = false;
+
+  @Output() closingEvent = new EventEmitter<boolean>();
 
   constructor(
     private articleService: ArticleService,
+    private router: Router
   ) {}
 
   ngOnInit(){
@@ -46,11 +55,20 @@ export class ImportArticlesComponent {
           droparea.css('background', 'var(--success-1)');
           droparea.css('color', 'white')
       }
+      this.loading = true;
       const formData = new FormData();
       formData.append('file', e.target.files[0]);
 
-      this.articleService.importEpubFromFile(formData).subscribe((response) => {
-        console.log(response);
+      this.articleService.importEpubFromFile(formData).subscribe({
+        next: (response) => {
+          this.loading = false;
+          this.router.navigate(['/app/read/'+response.id])
+        },
+        error: (err) => {
+          //TO DO: SWITCH CASE ALL ERRORS
+          this.loading = false;
+          this.error = err;
+        }
       });
     })
   }
@@ -58,4 +76,8 @@ export class ImportArticlesComponent {
   }
   ngAfterViewInıt(){
   }
+
+	close() {
+		this.closingEvent.emit(true);
+	}
 }

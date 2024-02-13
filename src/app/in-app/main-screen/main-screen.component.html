@@ -5,7 +5,7 @@
 </div>
 
 @if (showImportArticle) {
-    <app-import-articles></app-import-articles>
+    <app-import-articles (closingEvent)="closeDetail($event)"></app-import-articles>
 }
 
 <div class="list_section">

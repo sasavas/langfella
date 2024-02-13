@@ -12,5 +12,11 @@
         top: 0px;
         padding: 0;
     }
+
+    *::selection{
+        font-weight: 700 !important;
+        border-radius: 4px;
+        background: rgba(153, 234, 203, .8);
+    }
     
 }

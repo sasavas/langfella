@@ -12,7 +12,10 @@
 
     .lang_modal{
         background: var(--white);
-        padding: 20px;
+        padding: 20px 20px 30px 20px;
+        display: flex;
+        border-radius: 16px;
+        flex-direction: column;
     }
 
     .custom-file-upload {

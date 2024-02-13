@@ -118,7 +118,7 @@ export class AuthService {
       return;
     }
     const user = JSON.parse(localStorage.getItem('user') || '{}');
-    const loadedUser = new User(user.email, user.userId, user.jwt);
+    const loadedUser = new User(user.email, user.userId, user._jwt);
     if (loadedUser.userId) {
       this.user.next(loadedUser);
     }

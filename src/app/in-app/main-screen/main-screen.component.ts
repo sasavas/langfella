@@ -52,4 +52,8 @@ export class MainScreenComponent {
   logout() {
     this.authService.logout();
   }
+
+  closeDetail(newData: boolean) {
+    this.showImportArticle = false
+	}
 }
