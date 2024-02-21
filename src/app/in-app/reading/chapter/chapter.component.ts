@@ -28,11 +28,11 @@ export class ChapterComponent {
   
   ngAfterViewInit(){
 
-    $(".lang-cont").each(function(){
-      this.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-      });
-    });
+    // $(".lang-cont").each(function(){
+    //   this.addEventListener('contextmenu', function(e) {
+    //     e.preventDefault();
+    //   });
+    // });
 
     $('.lang-cont').on("click touchstart", (e) => {
       let s = window.getSelection();
