@@ -10,5 +10,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './in-app.component.scss'
 })
 export class InAppComponent {
-
+  isAuthenticated: boolean = false;
 }

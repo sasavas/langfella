@@ -29,3 +29,7 @@
   <span>Don't have a registered user?</span>
   <a [routerLink]="['/lobby/signup']" routerLinkActive="router-link-active"  class="ms-auto">Sign up</a>
 </div>
+
+@if(loading){
+  <app-loading></app-loading>
+}

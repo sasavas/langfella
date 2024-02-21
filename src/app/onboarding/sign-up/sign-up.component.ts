@@ -12,6 +12,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { LoadingComponent } from '../../loading/loading.component';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -23,7 +24,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink, LoadingComponent],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss'
 })
@@ -32,6 +33,8 @@ export class SignUpComponent {
   password: string = "";
   username: string = "";
   error: string = "";
+  signupSuccess: boolean = false;
+  loading: boolean = false;
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   passFormControl = new FormControl('', [Validators.required]);
@@ -45,14 +48,17 @@ export class SignUpComponent {
   ){}
 
   submit(){
+    this.loading = true;
     this.authService.signup(this.email, this.password, this.username).subscribe({
       next: (response) => {
-        this.router.navigate(['/lobby/login'])
+        this.signupSuccess = true;
+        this.loading = false;
       },
       error: (err) => {
         //TO DO: SWITCH CASE ALL ERRORS
         this.error = err;
         alert(err);
+        this.loading = false;
       }
     })
     }

@@ -17,23 +17,51 @@ import { LoadingComponent } from '../../loading/loading.component';
   styleUrl: './main-screen.component.scss',
 })
 export class MainScreenComponent {
+  uname: any = null;
   showImportArticle: boolean = false;
-  articles: Article[] = [];
+  articlesLibrary: Article[] = [];
+  importedArticles: Article[] = [];
+  continueReading: Article[] = []
+  error: string = "";
+
   constructor(
     private router: Router,
     private articleService: ArticleService,
     private authService: AuthService
   ) {}
+
   loading: boolean = false;
   title: string =
     'As Russia Strikes Ports, Ukraine’s Farmers Scramble to Keep Exporting';
 
   ngOnInit(): void {
     this.loading = true;
-    this.articleService.getArticles().subscribe((response) => {
-      console.log(response);
-      this.articles = response;
-      this.loading = false;
+    this.articleService.getArticles().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.articlesLibrary = response;
+      },
+      error: (err) => {
+        //TO DO: SWITCH CASE ALL ERRORS
+        this.error = err;
+        alert(err);
+        this.loading = false;
+      }
+    });
+
+    this.articleService.getImportedArciles().subscribe({
+      next: (response) => {
+        console.log(response);
+        console.log(response);
+        this.importedArticles = response;
+        this.loading = false;
+      },
+      error: (err) => {
+        //TO DO: SWITCH CASE ALL ERRORS
+        this.error = err;
+        alert(err);
+        this.loading = false;
+      }
     });
   }
 

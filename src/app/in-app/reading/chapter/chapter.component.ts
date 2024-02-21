@@ -84,7 +84,7 @@ export class ChapterComponent {
           s.addRange(newRange);
           
           // Alert selected text
-          let str = newRange.toString().trim();
+          let str = newRange.toString().trim().replace(/[.,;"]/g, "");
 
           this.translation = str;
 

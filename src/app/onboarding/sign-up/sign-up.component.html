@@ -1,7 +1,8 @@
-<h5 class="mb-2">
-  Sign Up
-</h5>
-<form class="example-form">
+@if (!signupSuccess) {
+  <h5 class="mb-2">
+    Sign Up
+  </h5>
+  <form class="example-form">
     <mat-form-field class="example-full-width">
         <mat-label>Username</mat-label>
         <input [(ngModel)]= "username" type="text" matInput [formControl]="unameFormControl" [errorStateMatcher]="matcher"
@@ -36,8 +37,26 @@
         }
       </mat-form-field>
       <button mat-raised-button class="ea_button bg_tertiary c_white" color="primary" (click)="submit()">Submit</button>
-</form>
-<div class="d-flex my-4">
-    <span>Already have a user?</span>
-    <a [routerLink]="['/lobby/login']" routerLinkActive="router-link-active"  class="ms-auto">Login</a>
-</div>
+  </form>
+  <div class="d-flex my-4">
+      <span>Already have a user?</span>
+      <a [routerLink]="['/lobby/login']" routerLinkActive="router-link-active"  class="ms-auto">Login</a>
+  </div>
+} @else {
+
+  <h5 class="mb-2">
+    You've Successfully Registered!
+  </h5>
+  <p>
+    Thank you, {{username}}! Your registration has been completed. <br><br>
+    To complete the activation process, please click on the activation link we've sent to your <b>email address</b> <br><br>
+    <!-- If you can't find the email, please check your spam folder or click [here] to resend the activation email. -->
+  </p>
+
+
+  <button mat-raised-button class="ea_button w-100 justify-content-center bg_tertiary c_white" color="primary" [routerLink]="['/lobby/login']">Go to Login</button>
+}
+
+@if(loading){
+  <app-loading></app-loading>
+}

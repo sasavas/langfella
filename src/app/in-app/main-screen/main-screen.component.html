@@ -1,24 +1,29 @@
 <div class="header">
     <app-logo-basic class="logo"></app-logo-basic>
 
-    <div (click)="logout()" class="logout clickable ms-auto">logout</div>
+    <div (click)="logout()" class="logout clickable ms-auto">
+        <!-- <mat-icon class="material-icons-outlined me-1 clickable" aria-hidden="false" fontIcon="logout"></mat-icon>  -->
+        logout</div>
 </div>
 
 @if (showImportArticle) {
     <app-import-articles (closingEvent)="closeDetail($event)"></app-import-articles>
 }
 
-<div class="list_section">
-    <h5 class="ls_header">
-        Continue Reading
-        <span class="ms-auto clickable">See more</span>
-    </h5>
-    <div class="ls_list">
-        @for (article of articles; track $index) {
-            <app-reading-list-item (click)="goToArticle(article.id)" [article]="article"></app-reading-list-item>
-        }
-    </div>
-</div>
+    @if (continueReading.length) {
+        <div class="list_section">
+            <h5 class="ls_header">
+                Continue Reading
+                <span class="ms-auto clickable">See more</span>
+            </h5>
+            <div class="ls_list">
+                @for (article of articlesLibrary; track $index) {
+                    <app-reading-list-item (click)="goToArticle(article.id)" [article]="article"></app-reading-list-item>
+                }
+            </div>
+        </div>
+    }
+
 
 <div class="list_section">
     <h5 class="ls_header">
@@ -26,7 +31,7 @@
         <span class="ms-auto clickable">See more</span>
     </h5>
     <div class="ls_list">
-        @for (article of articles; track $index) {
+        @for (article of articlesLibrary; track $index) {
             <app-reading-list-item (click)="goToArticle(article.id)" [article]="article"></app-reading-list-item>
         }
     </div>
@@ -40,7 +45,7 @@
         <span class="ms-auto clickable">See more</span>
     </h5>
     <div class="ls_list">
-        @for (article of articles; track $index) {
+        @for (article of importedArticles; track $index) {
             <app-reading-list-item (click)="goToArticle(article.id)" [article]="article"></app-reading-list-item>
         }
     </div>

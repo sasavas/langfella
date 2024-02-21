@@ -15,6 +15,7 @@ import serverConfig from "./service-config"
 })
 export class ArticleService {
   private getArticlesUrl = `${serverConfig.baseUrl}/Articles` as const;
+  private getLearnerArticlesUrl = `${serverConfig.baseUrl}/Learner/Articles` as const;
   private importEpubUrl = `${serverConfig.baseUrl}/Epub/importEpubBookFromFile` as const;
 
   constructor(private http: HttpClient, private authService: AuthService) {}
@@ -27,6 +28,20 @@ export class ArticleService {
 
     var request = {
       url: this.getArticlesUrl,
+      headers: headers,
+    };
+
+    return this.http.get<Article[]>(request.url, { headers: request.headers });
+  }
+
+  getImportedArciles(){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.authService.token}`,
+    });
+
+    var request = {
+      url: this.getLearnerArticlesUrl,
       headers: headers,
     };
 
