@@ -30,16 +30,16 @@ export class ImportArticlesComponent {
   ngOnInit(){
     let fileInput:any = document.getElementById('myFile')
     console.log(fileInput);
-    let droparea = $('.file-drop-area');
+    let droparea = document.getElementsByClassName('file-drop-area')[0];
 
     // highlight drag area
     $('.file-input').on('dragenter focus click', function() {
-      droparea.addClass('is-active');
+      droparea.classList.add('is-active');
     });
 
     // back to normal state
     $('.file-input').on('dragleave blur drop', function() {
-      droparea.removeClass('is-active');
+      droparea.classList.add('is-active');
     });
 
     fileInput.addEventListener('change', (e:any)=> {
@@ -52,8 +52,8 @@ export class ImportArticlesComponent {
       let fileName = fileInput.value.split('\\').pop();
       $textContainer.text(fileName);
       if(fileInput.value.length>0){
-          droparea.css('background', 'var(--success-1)');
-          droparea.css('color', 'white')
+        (droparea as HTMLElement).style.background = 'var(--success-1)';
+        (droparea as HTMLElement).style.color = 'white';
       }
       this.loading = true;
       const formData = new FormData();
