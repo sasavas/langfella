@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Article } from '../../models/articles';
+import { Article } from '../../shared/models/articles';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { AuthService } from './services/auth.service';
-import $ from "jquery";
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +25,6 @@ export class AppComponent {
       this.isAuthenticated = !!user;
       this.uname = user?.email.split('@')[0];
     });
-    
   }
 
   wrapWordsInSpan(text: string) {

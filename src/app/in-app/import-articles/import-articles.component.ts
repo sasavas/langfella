@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import $ from 'jquery';
-import { ArticleService } from '../../services/articles.service';
+import { ArticleService } from '../../shared/services/articles.service';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
-import { LoadingComponent } from '../../loading/loading.component';
+import { LoadingComponent } from '../../shared/components/loading/loading.component';
 
 
 @Component({

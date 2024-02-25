@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { LogoBasicComponent } from '../../../logo-basic/logo-basic.component';
+import { LogoBasicComponent } from '../../../shared/components/logo-basic/logo-basic.component';
 import $ from 'jquery';
 import { TranslateDialogComponent } from '../../translate-dialog/translate-dialog.component';
 
@@ -20,12 +20,12 @@ export class ChapterComponent {
 		this.closingEvent.emit(true);
     console.log("selami")
 	}
-  
+
 
   ngOnInit(){
 
   }
-  
+
   ngAfterViewInit(){
 
     $(".lang-cont").each(function(){
@@ -43,7 +43,7 @@ export class ChapterComponent {
           let endOffset = range.endOffset;
           let startNode: any = node;
           let endNode: any = node;
-          
+
           // Find start node and offset
           while (startOffset > 0 && startNode.textContent[startOffset - 1] != ' ') {
               startOffset -= 1;
@@ -59,7 +59,7 @@ export class ChapterComponent {
                   startOffset = startNode.textContent.length;
               }
           }
-          
+
           // Find end node and offset
           while (endOffset < node.textContent.length && node.textContent[endOffset] != ' ') {
               endOffset += 1;
@@ -75,14 +75,14 @@ export class ChapterComponent {
                   endOffset = 0;
               }
           }
-          
+
           // Create new range and select it
           let newRange = document.createRange();
           newRange.setStart(startNode, startOffset);
           newRange.setEnd(endNode, endOffset);
           s.removeAllRanges();
           s.addRange(newRange);
-          
+
           // Alert selected text
           let str = newRange.toString().trim().replace(/[.,;"]/g, "");
 

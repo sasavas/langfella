@@ -5,7 +5,6 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { exhaustMap, Observable, take } from 'rxjs';
-import { Router } from '@angular/router';
 import { Article, DetailedArticle } from '../models/articles';
 import { AuthService } from './auth.service';
 import serverConfig from "./service-config"

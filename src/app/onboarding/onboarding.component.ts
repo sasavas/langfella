@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, Router, RouterLink } from '@angular/router';
-import { LogoBasicComponent } from '../logo-basic/logo-basic.component';
-import { AuthService } from '../services/auth.service';
+import { LogoBasicComponent } from '../shared/components/logo-basic/logo-basic.component';
+import { AuthService } from '../shared/services/auth.service';
 import { MatIconModule } from '@angular/material/icon';
 
 
@@ -29,7 +29,7 @@ export class OnboardingComponent {
         // this.router.navigate(['lobby/login'])
       }
     });
-    
+
   }
 
 }

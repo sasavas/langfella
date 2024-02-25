@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { ReadingListItemComponent } from '../reading-list-item/reading-list-item.component';
-import { LogoBasicComponent } from '../../logo-basic/logo-basic.component';
-import { Article } from '../../models/articles';
-import { ArticleService } from '../../services/articles.service';
-import { AuthService } from '../../services/auth.service';
+import { LogoBasicComponent } from '../../shared/components/logo-basic/logo-basic.component';
+import { Article } from '../../shared/models/articles';
+import { ArticleService } from '../../shared/services/articles.service';
+import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { ImportArticlesComponent } from '../import-articles/import-articles.component';
-import { LoadingComponent } from '../../loading/loading.component';
+import { LoadingComponent } from '../../shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-main-screen',

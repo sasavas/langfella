@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LogoBasicComponent } from '../../logo-basic/logo-basic.component';
+import { LogoBasicComponent } from '../../../shared/components/logo-basic/logo-basic.component';
 import { RouterLink } from '@angular/router';
 
 @Component({

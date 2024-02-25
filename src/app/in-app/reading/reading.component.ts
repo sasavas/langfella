@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { DetailedArticle } from '../../models/articles';
+import { DetailedArticle } from '../../shared/models/articles';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { ArticleService } from '../../services/articles.service';
-import { LoadingComponent } from '../../loading/loading.component';
+import { ArticleService } from '../../shared/services/articles.service';
+import { LoadingComponent } from '../../shared/components/loading/loading.component';
 import { ChapterComponent } from './chapter/chapter.component';
-import { LogoBasicComponent } from '../../logo-basic/logo-basic.component';
+import { LogoBasicComponent } from '../../shared/components/logo-basic/logo-basic.component';
 
 @Component({
   selector: 'app-reading',
@@ -42,7 +42,7 @@ export class ReadingComponent {
       }else{
         this.loading = false;
       }
-    }); 
+    });
   }
 
   openChapter(chapter:any){
