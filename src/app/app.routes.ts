@@ -7,13 +7,13 @@ import { OnboardingComponent } from './onboarding/onboarding.component';
 import { LoginComponent } from './onboarding/login/login.component';
 import { SignUpComponent } from './onboarding/sign-up/sign-up.component';
 import { ReadingComponent } from './in-app/reading/reading.component';
-import { LandingComponent } from './onboarding/landing/landing.component';
+import { SiteComponent } from './onboarding/site/site.component';
 import { VerificationComponent } from './onboarding/verification/verification.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: LandingComponent,
+    component: SiteComponent,
     children: [
     ],
   },

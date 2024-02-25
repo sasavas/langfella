@@ -26,8 +26,6 @@ export class ImportArticlesComponent {
     private router: Router
   ) {}
 
-  // Removed jQuery and direct DOM manipulation
-
   fileChanged(event: any) {
     const files = event.target.files;
     if (files.length > 0) {

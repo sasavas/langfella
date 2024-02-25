@@ -4,12 +4,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-landing',
+  selector: 'app-site',
   standalone: true,
   imports: [SiteNavComponent, MatIconModule, RouterLink],
-  templateUrl: './landing.component.html',
-  styleUrl: './landing.component.scss'
+  templateUrl: './site.component.html',
+  styleUrl: './site.component.scss'
 })
-export class LandingComponent {
+export class SiteComponent {
 
 }
