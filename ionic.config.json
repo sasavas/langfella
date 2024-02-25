@@ -1,0 +1,7 @@
+{
+  "name": "langfella",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}
