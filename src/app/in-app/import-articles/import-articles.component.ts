@@ -74,7 +74,7 @@ export class ImportArticlesComponent {
   }
   afterRender(){
   }
-  ngAfterViewInıt(){
+  ngAfterViewInit(){
   }
 
 	close() {
