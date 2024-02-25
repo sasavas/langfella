@@ -52,7 +52,6 @@ export class MainScreenComponent {
     this.articleService.getImportedArciles().subscribe({
       next: (response) => {
         console.log(response);
-        console.log(response);
         this.importedArticles = response;
         this.loading = false;
       },
