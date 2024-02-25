@@ -11,30 +11,42 @@
         }@else {
             <h1 class="article_header my-4"> Untitled Chapter </h1>
         }
-        
+
     </div>
 
     @for (section of chapterData.contents; track $index) {
         @if (section.tag == 'p') {
-            <p class="my-2 lang-cont p"> {{section.content}} </p>
+            <p class="my-2 lang-cont p" (click)="onSelectText($event)" (touchStart)="onSelectText($event)">
+               {{section.content}}
+            </p>
         }@else if (section.tag == 'h1') {
-            <h2 class="my-2 lang-cont"> {{section.content}} </h2>
+            <h2 class="my-2 lang-cont" (click)="onSelectText($event)" (touchStart)="onSelectText($event)">
+              {{section.content}}
+            </h2>
         }@else if (section.tag == 'h2') {
-            <h2 class="my-2 lang-cont"> {{section.content}} </h2>
+            <h2 class="my-2 lang-cont" (click)="onSelectText($event)" (touchStart)="onSelectText($event)">
+              {{section.content}}
+            </h2>
         }@else if (section.tag == 'h3') {
-            <h3 class="my-2 lang-cont"> {{section.content}} </h3>
+            <h3 class="my-2 lang-cont" (click)="onSelectText($event)" (touchStart)="onSelectText($event)">
+               {{section.content}}
+            </h3>
         }@else if (section.tag == 'h4') {
-            <h4 class="my-2 lang-cont"> {{section.content}} </h4>
+            <h4 class="my-2 lang-cont" (click)="onSelectText($event)" (touchStart)="onSelectText($event)">
+              {{section.content}}
+            </h4>
         }@else if (section.tag == 'h5') {
-            <h5 class="my-2 lang-cont"> {{section.content}} </h5>
+            <h5 class="my-2 lang-cont" (click)="onSelectText($event)" (touchStart)="onSelectText($event)">
+              {{section.content}}
+            </h5>
         }
         @else if (section.tag == 'h6') {
-            <h6 class="my-2 lang-cont"> {{section.content}} </h6>
+            <h6 class="my-2 lang-cont" (click)="onSelectText($event)" (touchStart)="onSelectText($event)">
+              {{section.content}}
+            </h6>
         }
-        
     }
 }
-
 @if (translation) {
-    <app-translate-dialog (closingEvent)="closeTranslate()" [translateText]="translation" ></app-translate-dialog>
+    <app-translate-dialog (closingEvent)="closeTranslate()" [translateText]="translation"></app-translate-dialog>
 }
