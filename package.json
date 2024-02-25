@@ -5,7 +5,7 @@
     "ng": "ng",
     "watch": "ng build --watch --configuration development",
     "start": "node dist/langfella/server/server.mjs",
-    "dev": "ng serve",
+    "dev": "ng serve --host 0.0.0.0",
     "build": "ng build",
     "test": "ng test",
     "serve:ssr:Langfella": "node dist/langfella/server/server.mjs",
