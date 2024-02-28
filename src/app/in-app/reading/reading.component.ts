@@ -19,6 +19,7 @@ export class ReadingComponent {
   loading: boolean = false;
   currentChapter: any = null;
   lastroute: any = "";
+  sourceLang: any = "";
 
   constructor(
     private activetedRoute: ActivatedRoute,
@@ -35,6 +36,7 @@ export class ReadingComponent {
         .getArticle(response1['articleId'])
         .subscribe((response) => {
           this.article = response;
+          this.sourceLang = this.article.languageCode;
           console.log(response);
           this.lastroute = response1['articleId'];
           this.loading = false;

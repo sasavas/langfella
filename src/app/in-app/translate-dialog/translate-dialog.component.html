@@ -6,6 +6,33 @@
         {{translateText}}
     </div>
     <ul class="td_results">
-
+        <span>Turkish translation(s)</span>
+        @if(translatedText !== null){
+            @for(item of translatedText; track $index){
+                <li class="translate">
+                    <mat-icon class="material-icons-outlined me-2 clickable" aria-hidden="false" fontIcon="add"></mat-icon> {{item.translations}}
+                </li>
+            }
+        }@else{
+            <li class="loading_grad">
+            </li>
+            <li class="loading_grad">
+            </li>
+        }
     </ul>
+    <div class="survey">
+        <span>Rate your familiarity for this translation</span>
+        <div class="votes">
+            <div>
+                unknown
+            </div>
+            <div>
+                familiar
+            </div>
+            <div>
+                known
+            </div>
+        </div>
+
+    </div>
 </div>

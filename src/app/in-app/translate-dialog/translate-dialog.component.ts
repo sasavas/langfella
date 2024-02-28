@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, 	SimpleChanges} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -12,6 +12,13 @@ export class TranslateDialogComponent {
 
   @Output() closingEvent = new EventEmitter<boolean>();
   @Input() translateText: string = "";
+  @Input() translatedText: any;
+
+	ngOnChanges(changes: SimpleChanges) {
+		if (changes.translatedText) {
+      console.log(this.translatedText);
+		}
+	}
 
 
   close() {

@@ -29,6 +29,15 @@
     }
 }
 
+.ls_list{
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+
+    &::-webkit-scrollbar { 
+        display: none;  /* Safari and Chrome */
+    }
+}
+
 .logout{
     font-weight: 400;
     display: flex;

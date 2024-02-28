@@ -14,39 +14,108 @@
 
     </div>
 
-    @for (section of chapterData.contents; track $index) {
-        @if (section.tag == 'p') {
-            <p class="my-2 lang-cont p" (click)="onSelectText($event)" (touchStart)="onSelectText($event)">
-               {{section.content}}
-            </p>
-        }@else if (section.tag == 'h1') {
-            <h2 class="my-2 lang-cont" (click)="onSelectText($event)" (touchStart)="onSelectText($event)">
-              {{section.content}}
-            </h2>
-        }@else if (section.tag == 'h2') {
-            <h2 class="my-2 lang-cont" (click)="onSelectText($event)" (touchStart)="onSelectText($event)">
-              {{section.content}}
-            </h2>
-        }@else if (section.tag == 'h3') {
-            <h3 class="my-2 lang-cont" (click)="onSelectText($event)" (touchStart)="onSelectText($event)">
-               {{section.content}}
-            </h3>
-        }@else if (section.tag == 'h4') {
-            <h4 class="my-2 lang-cont" (click)="onSelectText($event)" (touchStart)="onSelectText($event)">
-              {{section.content}}
-            </h4>
-        }@else if (section.tag == 'h5') {
-            <h5 class="my-2 lang-cont" (click)="onSelectText($event)" (touchStart)="onSelectText($event)">
-              {{section.content}}
-            </h5>
+    @if(OS == 'Windows' || OS == 'MacOS' ||  OS == 'Linux'){
+        @for (section of chapterData.contents; track $index) {
+            @if (section.tag == 'p') {
+                <p class="my-2 lang-cont p" (click)="getClickedWord($event)">
+                   {{section.content}}
+                </p>
+            }@else if (section.tag == 'h1') {
+                <h2 class="my-2 lang-cont" (click)="getClickedWord($event)">
+                  {{section.content}}
+                </h2>
+            }@else if (section.tag == 'h2') {
+                <h2 class="my-2 lang-cont" (click)="getClickedWord($event)">
+                  {{section.content}}
+                </h2>
+            }@else if (section.tag == 'h3') {
+                <h3 class="my-2 lang-cont" (click)="getClickedWord($event)">
+                   {{section.content}}
+                </h3>
+            }@else if (section.tag == 'h4') {
+                <h4 class="my-2 lang-cont" (click)="getClickedWord($event)">
+                  {{section.content}}
+                </h4>
+            }@else if (section.tag == 'h5') {
+                <h5 class="my-2 lang-cont" (click)="getClickedWord($event)">
+                  {{section.content}}
+                </h5>
+            }
+            @else if (section.tag == 'h6') {
+                <h6 class="my-2 lang-cont" (click)="getClickedWord($event)">
+                  {{section.content}}
+                </h6>
+            }
         }
-        @else if (section.tag == 'h6') {
-            <h6 class="my-2 lang-cont" (click)="onSelectText($event)" (touchStart)="onSelectText($event)">
-              {{section.content}}
-            </h6>
+    }@else if(OS == 'ipadOS'){
+        @for (section of chapterData.contents; track $index) {
+            @if (section.tag == 'p') {
+                <p class="my-2 lang-cont p" (touchend)="getClickedWord($event)">
+                   {{section.content}}
+                </p>
+            }@else if (section.tag == 'h1') {
+                <h2 class="my-2 lang-cont" (touchend)="getClickedWord($event)">
+                  {{section.content}}
+                </h2>
+            }@else if (section.tag == 'h2') {
+                <h2 class="my-2 lang-cont" (touchend)="getClickedWord($event)">
+                  {{section.content}}
+                </h2>
+            }@else if (section.tag == 'h3') {
+                <h3 class="my-2 lang-cont" (touchend)="getClickedWord($event)">
+                   {{section.content}}
+                </h3>
+            }@else if (section.tag == 'h4') {
+                <h4 class="my-2 lang-cont" (touchend)="getClickedWord($event)">
+                  {{section.content}}
+                </h4>
+            }@else if (section.tag == 'h5') {
+                <h5 class="my-2 lang-cont" (touchend)="getClickedWord($event)">
+                  {{section.content}}
+                </h5>
+            }
+            @else if (section.tag == 'h6') {
+                <h6 class="my-2 lang-cont"  (touchend)="getClickedWord($event)">
+                  {{section.content}}
+                </h6>
+            }
+        }
+    }@else if(OS == 'Android' || OS == 'iOS'){
+        @for (section of chapterData.contents; track $index) {
+            @if (section.tag == 'p') {
+                <p class="my-2 lang-cont p" oncontextmenu="event.preventDefault()">
+                   {{section.content}}
+                </p>
+            }@else if (section.tag == 'h1') {
+                <h2 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
+                  {{section.content}}
+                </h2>
+            }@else if (section.tag == 'h2') {
+                <h2 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
+                  {{section.content}}
+                </h2>
+            }@else if (section.tag == 'h3') {
+                <h3 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
+                   {{section.content}}
+                </h3>
+            }@else if (section.tag == 'h4') {
+                <h4 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
+                  {{section.content}}
+                </h4>
+            }@else if (section.tag == 'h5') {
+                <h5 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
+                  {{section.content}}
+                </h5>
+            }
+            @else if (section.tag == 'h6') {
+                <h6 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
+                  {{section.content}}
+                </h6>
+            }
         }
     }
+
 }
 @if (translation) {
-    <app-translate-dialog (closingEvent)="closeTranslate()" [translateText]="translation"></app-translate-dialog>
+    <app-translate-dialog [ngClass]="OS == 'Android' || OS == 'iOS' ? 'mobile' : 'web'" (closingEvent)="closeTranslate()" [translatedText]="translated" [translateText]="translation"></app-translate-dialog>
 }

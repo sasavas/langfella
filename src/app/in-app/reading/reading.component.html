@@ -37,7 +37,7 @@
 
 
 @if (currentChapter) {
-    <app-chapter (closingEvent)="closeChapter()" [chapterData]="currentChapter"></app-chapter>
+    <app-chapter (closingEvent)="closeChapter()" [sourceLanguage]="this.sourceLang" [chapterData]="currentChapter"></app-chapter>
 }
 
 
