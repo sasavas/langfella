@@ -77,7 +77,15 @@ export class MainScreenComponent {
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.logout().subscribe({
+      next: (response) => {
+        this.router.navigate(['../../']);
+      },
+      error: (error) => {
+        this.error = error;
+        console.log(error);
+      }
+    })
   }
 
   closeDetail(newData: boolean) {

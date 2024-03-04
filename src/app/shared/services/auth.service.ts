@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Subject, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
@@ -12,6 +16,7 @@ export class AuthService {
   private verifyLink = `${serviceConfig.baseUrl}/Users/verify`;
   private registerlink = `${serviceConfig.baseUrl}/Users/register`;
   private loginlink = `${serviceConfig.baseUrl}/Users/login`;
+  private logoutLink = `${serviceConfig.baseUrl}/Users/logout`;
   user = new BehaviorSubject<User | null>(null);
 
   get token(): string {
@@ -33,9 +38,16 @@ export class AuthService {
   // }
 
   logout() {
-    this.user.next(null);
-    localStorage.removeItem('user');
-    this.router.navigate(['../../']);
+    let headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+
+    return this.http
+      .get<any>(this.logoutLink, { headers })
+      .pipe(tap((response) => {
+        this.user.next(null);
+        localStorage.removeItem('user');
+      }));
   }
 
   login(email: string, password: string) {
@@ -52,17 +64,17 @@ export class AuthService {
       );
   }
 
-  signup(email: string, password: string, userName: string,){
+  signup(email: string, password: string, userName: string) {
     let headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     });
 
     let user = {
       email,
       password: password,
-      languageCode: "en",
+      languageCode: 'en',
       userName,
-    }
+    };
 
     var request = {
       url: this.registerlink,
@@ -74,9 +86,9 @@ export class AuthService {
     return this.http.post<any>(request.url, user, { headers: request.headers });
   }
 
-  verify(veridicationCode: string){
+  verify(veridicationCode: string) {
     let headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     });
 
     var request = {
@@ -86,7 +98,9 @@ export class AuthService {
 
     console.log(veridicationCode);
 
-    return this.http.post<any>(request.url, veridicationCode, { headers: request.headers });
+    return this.http.post<any>(request.url, veridicationCode, {
+      headers: request.headers,
+    });
   }
 
   // loadStyle(theme?:any): void {
