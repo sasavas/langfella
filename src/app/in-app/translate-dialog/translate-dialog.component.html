@@ -7,10 +7,10 @@
     </div>
     <ul class="td_results">
         <span>Turkish translation(s)</span>
-        @if(translatedText !== null){
-            @for(item of translatedText; track $index){
+        @if(translatedList.length){
+            @for(item of translatedList; track $index){
                 <li class="translate">
-                    <mat-icon class="material-icons-outlined me-2 clickable" aria-hidden="false" fontIcon="add"></mat-icon> {{item.translations}}
+                    <mat-icon class="material-icons-outlined me-2 clickable" aria-hidden="false" fontIcon="add"></mat-icon> {{item}}
                 </li>
             }
         }@else{

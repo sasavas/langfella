@@ -47,7 +47,7 @@
                 </h6>
             }
         }
-    }@else if(OS == 'ipadOS'){
+    }@else if(OS == 'ipadOS' || OS == 'iOS'){
         @for (section of chapterData.contents; track $index) {
             @if (section.tag == 'p') {
                 <p class="my-2 lang-cont p" (touchend)="getClickedWord($event)">
@@ -80,7 +80,7 @@
                 </h6>
             }
         }
-    }@else if(OS == 'Android' || OS == 'iOS'){
+    }@else if(OS == 'Android'){
         @for (section of chapterData.contents; track $index) {
             @if (section.tag == 'p') {
                 <p class="my-2 lang-cont p" oncontextmenu="event.preventDefault()">
@@ -116,6 +116,19 @@
     }
 
 }
-@if (translation) {
+@if (translation && OS !== 'Android') {
     <app-translate-dialog [ngClass]="OS == 'Android' || OS == 'iOS' ? 'mobile' : 'web'" (closingEvent)="closeTranslate()" [translatedText]="translated" [translateText]="translation"></app-translate-dialog>
+}
+
+@if (androidTranslation && showAndroidTranslation) {
+    <app-translate-dialog [ngClass]="OS == 'Android' || OS == 'iOS' ? 'mobile' : 'web'" (closingEvent)="closeTranslate()" [translatedText]="translated" [translateText]="androidTranslation"></app-translate-dialog>
+}
+
+@if (translation && OS == 'Android'){
+    <div class="translate_android">
+        <div class="td_content">
+            {{translation}}
+        </div>        
+        <button [disabled]="maxCharAndroid" [ngClass]="{'ea_disabled': maxCharAndroid}" (click)="translateForAndroid()" mat-raised-button class="ea_button w-100 justify-content-center bg_tertiary c_white">Translate this</button>
+    </div>
 }

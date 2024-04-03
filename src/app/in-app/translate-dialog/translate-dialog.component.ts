@@ -14,9 +14,16 @@ export class TranslateDialogComponent {
   @Input() translateText: string = "";
   @Input() translatedText: any;
 
+  translatedList: any[] = [];
+
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes.translatedText) {
-      console.log(this.translatedText);
+      if(this.translatedText !== null){
+        for(let item of this.translatedText){
+          this.translatedList.push(item.translations)
+        }
+        this.translatedList = [...new Set(this.translatedList)];
+      }
 		}
 	}
 

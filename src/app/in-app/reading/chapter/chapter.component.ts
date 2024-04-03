@@ -21,6 +21,10 @@ export class ChapterComponent {
   OS: any = null
   error: any;
 
+  androidTranslation: any = null;
+  maxCharAndroid: boolean = false;
+  showAndroidTranslation: boolean = false;
+
   constructor(
     private translationService: TranslationService
   ) {}
@@ -32,7 +36,7 @@ export class ChapterComponent {
 
   ngOnInit() {
     this.getOS();
-    if(this.OS == 'Android' || this.OS == 'iOS'){
+    if(this.OS == 'Android'){
       document.addEventListener('selectionchange', this.handleSelectionChange);
     }
   }
@@ -40,6 +44,14 @@ export class ChapterComponent {
   ngOnDestroy() {
     // Event listener'ı temizle
     document.removeEventListener('selectionchange', this.handleSelectionChange);
+
+    this.translation = null;
+    this.translated = null;
+    this.clickActive = false;
+  
+    this.androidTranslation = null;
+    this.maxCharAndroid = false;
+    this.showAndroidTranslation = false;
   }
 
 
@@ -54,9 +66,23 @@ export class ChapterComponent {
     let s = window.getSelection();
 
      if (s && s.anchorNode && s.toString().length > 0) {
-       if (event instanceof TouchEvent && event.changedTouches.length > 0) {
+      if(s && s.anchorNode && s.toString().length > 25) {
+        alert("The selected translation content cannot be longer than 25 characters")
+      }else{
+        if (event instanceof TouchEvent && event.changedTouches.length > 0) {
           // alert("touch");
           this.translation = s.toString();
+          this.translationService.getTranslation(this.translation, this.sourceLanguage, "tr").subscribe({
+            next: (response) => {
+              console.log(response);
+              this.translated = response;
+            },
+            error: (err) => {
+              //TO DO: SWITCH CASE ALL ERRORS
+              this.error = err;
+              alert(err);
+            }
+          });
           setTimeout(() => {
             if (window.getSelection) {
               window.getSelection()?.removeAllRanges();
@@ -131,6 +157,7 @@ export class ChapterComponent {
           });
           window.getSelection()?.removeAllRanges();
        }
+      }
 
      } else {
       // Hiçbir metin seçilmemişse, MouseEvent kullanarak tıklanan kelimeyi bulma mantığı burada olur
@@ -145,11 +172,36 @@ export class ChapterComponent {
   handleSelectionChange = () => {
     const selection = window.getSelection();
     if (selection && selection.toString().length > 0) {
-      const selectedText = selection.toString();
-      this.translation = selectedText;
-      // Uyarı yerine, seçilen metni işlemek için kendi kodunuzu buraya ekleyin.
+      if( selection.toString().length > 25) {
+        this.maxCharAndroid = true;
+        this.translation = "The maximum character length for translation is 25";
+      }else{
+        const selectedText = selection.toString();
+        this.translation = selectedText;
+        this.maxCharAndroid = false;
+      }
     }else{
       this.translation = null;
+      this.maxCharAndroid = false;
+    }
+  }
+
+  translateForAndroid(){
+    this.androidTranslation = this.translation;
+    this.translationService.getTranslation(this.androidTranslation, this.sourceLanguage, "tr").subscribe({
+      next: (response) => {
+        console.log(response);
+        this.translated = response;
+      },
+      error: (err) => {
+        //TO DO: SWITCH CASE ALL ERRORS
+        this.error = err;
+        alert(err);
+      }
+    });
+    this.showAndroidTranslation = true;
+    if (window.getSelection) {
+      window.getSelection()?.removeAllRanges();
     }
   }
 
@@ -185,5 +237,7 @@ export class ChapterComponent {
     }
     this.translation = null;
     this.translated = null;
+    this.androidTranslation = null;
+    this.showAndroidTranslation = false;
   }
 }

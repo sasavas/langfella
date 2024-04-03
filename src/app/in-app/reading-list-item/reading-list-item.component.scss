@@ -1,17 +1,18 @@
 :host{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 16px;
     max-width: 248px;
     min-width: 248px;
     height: 180px;
-    background: var(--background-1);
+    background: var(--background-0);
     border-radius: 10px;
     padding: 20px;
     cursor: pointer;
 
     &:hover{
-        background: var(--background-0);
+        background: var(--background-1);
     }
 
     h4{
