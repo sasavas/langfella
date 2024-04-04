@@ -3,10 +3,11 @@ import { LogoBasicComponent } from '../../../shared/components/logo-basic/logo-b
 import { TranslateDialogComponent } from '../../translate-dialog/translate-dialog.component';
 import { CommonModule } from '@angular/common';
 import { TranslationService } from '../../../shared/services/translations.service';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-chapter',
   standalone: true,
-  imports: [LogoBasicComponent, TranslateDialogComponent, CommonModule],
+  imports: [LogoBasicComponent, TranslateDialogComponent, CommonModule, MatIconModule],
   templateUrl: './chapter.component.html',
   styleUrl: './chapter.component.scss',
 })
@@ -15,11 +16,16 @@ export class ChapterComponent {
   @Input() sourceLanguage: any;
   @Output() closingEvent = new EventEmitter<boolean>();
 
+
+
+
   translation: any = null;
   translated: any = null;
   clickActive: boolean = false;
   OS: any = null
   error: any;
+
+  translationDialog: boolean = false;
 
   androidTranslation: any = null;
   maxCharAndroid: boolean = false;
@@ -52,6 +58,8 @@ export class ChapterComponent {
     this.androidTranslation = null;
     this.maxCharAndroid = false;
     this.showAndroidTranslation = false;
+
+    window.speechSynthesis.cancel();
   }
 
 
@@ -59,8 +67,6 @@ export class ChapterComponent {
     
   }
 
-  ngAfterViewInıt(){
-  }
 
   getClickedWord(event: MouseEvent | TouchEvent): void {
     let s = window.getSelection();
@@ -200,9 +206,12 @@ export class ChapterComponent {
       }
     });
     this.showAndroidTranslation = true;
-    if (window.getSelection) {
-      window.getSelection()?.removeAllRanges();
-    }
+    setTimeout(() => {
+      if (window.getSelection) {
+        window.getSelection()?.removeAllRanges();
+      }
+    }, 100);
+
   }
 
 
@@ -239,5 +248,50 @@ export class ChapterComponent {
     this.translated = null;
     this.androidTranslation = null;
     this.showAndroidTranslation = false;
+  }
+
+  seslendirMetin() {
+    const speechSynthesis = window.speechSynthesis;
+    for(let section of this.chapterData.contents){
+      const soylem = new SpeechSynthesisUtterance(section.content);
+      soylem.rate = .8;
+      soylem.lang = 'en-US'; // Dil ayarı
+      speechSynthesis.speak(soylem);
+    }
+  }
+
+  speachText() {
+    const speakSection = (index = 0) => {
+      if (index >= this.chapterData.contents.length) return; // Tüm bölümler tamamlandı
+  
+      const section = this.chapterData.contents[index];
+      const cumleler = section.content.split(/(?<=[.?!;])\s/);
+      let cumleIndex = 0;
+  
+      const speakSentence = () => {
+        if (cumleIndex >= cumleler.length) {
+          speakSection(index + 1); // Bu bölüm tamamlandı, bir sonraki bölüme geç
+          return;
+        }
+  
+        const cumle = cumleler[cumleIndex];
+        const soylem = new SpeechSynthesisUtterance(cumle);
+        soylem.rate = .8;
+        soylem.lang = 'en-US';
+  
+        soylem.onend = () => {
+          setTimeout(() => {
+            cumleIndex++;
+            speakSentence(); // Bir sonraki cümleyi seslendir
+          }, 500); // 500 milisaniye bekleyin
+        };
+  
+        window.speechSynthesis.speak(soylem);
+      };
+  
+      speakSentence(); // Bu bölümün ilk cümlesini seslendir
+    };
+  
+    speakSection(); // İlk bölümü seslendir
   }
 }

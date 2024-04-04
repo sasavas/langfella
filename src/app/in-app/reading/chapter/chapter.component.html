@@ -14,6 +14,12 @@
 
     </div>
 
+    <button (click)="speachText()" mat-raised-button class="ea_button justify-content-center bg_tertiary c_white">
+        <mat-icon class="material-icons-outlined" aria-hidden="false" aria-label="Example home icon" fontIcon="volume_down"></mat-icon>
+        Audio
+        
+    </button>
+
     @if(OS == 'Windows' || OS == 'MacOS' ||  OS == 'Linux'){
         @for (section of chapterData.contents; track $index) {
             @if (section.tag == 'p') {

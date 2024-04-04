@@ -1,6 +1,7 @@
 export interface Article {
   id?: string;
   languageCode?: string;
+  level?: string;
   title?: string;
   source?: string;
   authors?: string[];

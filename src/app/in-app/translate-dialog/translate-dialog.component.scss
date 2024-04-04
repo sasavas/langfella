@@ -3,19 +3,21 @@
 
     &.mobile{
         position: fixed;
+        top: 0;
         right: 0;
         bottom: 0;
         left: 0;
         display: flex;
-        align-items: center;
+        align-items: end;
         justify-content: center;
         z-index: 4;
+        background: rgba($color: #000000, $alpha: .2);
 
         .translate_dialog{
             overflow: hidden;
             background: var(--background-1);
             width: 100%;
-            gap: 10px;
+            gap: 4px;
             // padding-bottom: 96px;
             display: flex;
             border-top-right-radius: 16px;
@@ -26,6 +28,7 @@
 
     &.web{
         position: fixed;
+        user-select: none;
         top: 0;
         right: 0;
         bottom: 0;
@@ -33,14 +36,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 2;
+        z-index: 4;
         background: rgba($color: #000000, $alpha: .2);
 
         .translate_dialog{
             overflow: hidden;
             background: var(--background-1);
             width: 320px;
-            gap: 10px;
+            gap: 4px;
             display: flex;
             border-radius: 16px;
             flex-direction: column;
@@ -63,9 +66,21 @@
     }
 
     .td_content{
+        display: flex;
+        align-items: center;
         padding: 12px 20px;
         line-height: 1.3;
         font-size: 22px;
+
+        .material-icons-outlined{
+            font-size: 32px;
+            width: 32px;
+            height: 32px;
+
+            &:hover{
+                color: var(--tertiary);
+            }
+        }
     }
 
     .td_results{

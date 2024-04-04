@@ -27,6 +27,22 @@ export class TranslateDialogComponent {
 		}
 	}
 
+  speakText(): void {
+    if ('speechSynthesis' in window) {
+      // SpeechSynthesisUtterance nesnesi oluşturuluyor
+      const utterance = new SpeechSynthesisUtterance(this.translateText);
+      // Opsiyonel: Seslendirmede kullanılacak dil ve sesi ayarlayabilirsiniz
+      utterance.lang = 'en-US'; // Türkçe için
+      
+      const availableVoices = window.speechSynthesis.getVoices();
+      console.log(availableVoices)
+      // Metni seslendir
+      window.speechSynthesis.speak(utterance);
+    } else {
+      alert('Üzgünüz, tarayıcınız metni sese dönüştürme özelliğini desteklemiyor.');
+    }
+  }
+
 
   close() {
 		this.closingEvent.emit(true);

@@ -3,7 +3,10 @@
        <span></span> <mat-icon (click)="close()" class="material-icons-outlined ms-auto clickable" aria-hidden="false" fontIcon="close"></mat-icon>
     </div>
     <div class="td_content">
-        {{translateText}}
+        <span>
+            {{translateText}}
+        </span>
+        <mat-icon class="material-icons-outlined ms-2 clickable" (click)="speakText()" fontIcon="volume_down_black"></mat-icon>
     </div>
     <ul class="td_results">
         <span>Turkish translation(s)</span>
