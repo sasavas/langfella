@@ -13,6 +13,10 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class WordsComponent {
 
+  playCard: boolean = false;
+  playCardResult: boolean = false;
+  flashCard: any = null;
+  
   words: any[] = [];
   error: any;
 
@@ -46,6 +50,32 @@ export class WordsComponent {
         alert(err);
       }
     });
+  }
+
+  flashcard(){
+    if(this.playCard){
+      this.playCard = false;
+      this.playCardResult = false;
+      this.flashCard = null;
+    }else{
+      this.playCard = true;
+      this.flashCard = this.getRandomElement(this.words);
+      console.log(this.flashCard)
+    }
+  }
+
+  cardResult(){
+    if(this.playCardResult){
+      this.playCardResult = false
+    }else{
+      this.playCardResult = true
+    }
+  }
+
+  getRandomElement(words: any[]) {
+    if(words.length === 0) throw new Error("Dizi boş.");
+    const randomIndex = Math.floor(Math.random() * words.length);
+    return words[randomIndex];
   }
 
 }

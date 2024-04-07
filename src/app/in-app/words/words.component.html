@@ -1,6 +1,10 @@
 <div class="header">
     <app-logo-basic class="logo"></app-logo-basic>
     <div [routerLink]="['/app']" routerLinkActive="router-link-active" class="logout clickable"><mat-icon class="material-icons-outlined ms-2 me-1" aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back"></mat-icon> Home</div>
+    <button (click)="flashcard()" class="ea_button justify-content-center ms-auto bg_tertiary c_white">
+        <mat-icon class="material-icons-outlined me-2" aria-hidden="false" aria-label="Example home icon" fontIcon="content_copy"></mat-icon>
+        Flashcards
+    </button>
 </div>
 
 <ul class="words">
@@ -24,3 +28,27 @@
 
     }
 </ul>
+
+@if(playCard){
+    <div class="playCard">
+        <div class="flashcard">
+            <mat-icon (click)="flashcard()" class="material-icons-outlined close clickable" aria-hidden="false" fontIcon="close"></mat-icon>
+            <app-logo-basic class="logo"></app-logo-basic>
+            <div class="translations">
+                @if(playCardResult){
+                    @for(translation of flashCard.translations; track $index){
+                       <span>
+                        {{translation}}
+                       </span> 
+                    }
+                }@else{
+                    {{flashCard.text}}
+                }
+            </div>
+            <button (click)="cardResult()" class="ea_button btn_md justify-content-center w-100 bg_tertiary c_white">
+                <mat-icon class="material-icons-outlined me-2" aria-hidden="false" aria-label="Example home icon" fontIcon="loop"></mat-icon>
+                Flip card
+            </button>            
+        </div>
+    </div>
+}
