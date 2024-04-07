@@ -1,1 +1,26 @@
-<p>words works!</p>
+<div class="header">
+    <app-logo-basic class="logo"></app-logo-basic>
+    <div [routerLink]="['/app']" routerLinkActive="router-link-active" class="logout clickable"><mat-icon class="material-icons-outlined ms-2 me-1" aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back"></mat-icon> Home</div>
+</div>
+
+<ul class="words">
+    @for (word of words; track $index) {
+        <li>
+            <h5 class="text">
+                {{word.text}}
+                <mat-icon class="material-icons-outlined ms-auto clickable" (click)="deleteWord(word.id)" fontIcon="delete"></mat-icon>
+            </h5>
+            <div class="translations">
+                @for(translation of word.translations; track $index){
+                    @if($index >= 1){
+                        <span> / </span> <span> {{translation}} </span>
+                    }@else{
+                        <span> {{translation}} </span>
+                    }
+
+                }
+            </div>
+        </li>
+
+    }
+</ul>

@@ -6,6 +6,8 @@
         background: var(--primary-light);
 
         .logout{
+            display: flex;
+            align-items: center;
             &:hover{
                 color: var(--tertiary);
             }
@@ -36,6 +38,8 @@
         align-items: center;
 
         .logout{
+            display: flex;
+            align-items: center;
             &:hover{
                 color: var(--tertiary);
             }

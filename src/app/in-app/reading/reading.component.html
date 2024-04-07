@@ -1,8 +1,7 @@
 @if (!currentChapter) {
     <div class="header">
         <app-logo-basic class="logo"></app-logo-basic>
-
-        <div [routerLink]="['/app']" routerLinkActive="router-link-active"  class="logout clickable ms-auto">Back to home</div>
+        <div [routerLink]="['/app']" routerLinkActive="router-link-active" class="logout clickable"><mat-icon class="material-icons-outlined ms-2 me-1" aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back"></mat-icon> Back to home</div>
     </div>
 
     <div class="d-flex">

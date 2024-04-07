@@ -15,7 +15,7 @@ export class NavbarComponent {
     if (screen === 1) {
       this.router.navigate(['app']);
     } else if (screen === 2) {
-      this.router.navigate(['word']);
+      this.router.navigate(['app/word']);
       console.log();
     }
   }

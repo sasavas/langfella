@@ -31,8 +31,6 @@ export class MainScreenComponent {
   ) {}
 
   loading: boolean = false;
-  title: string =
-    'As Russia Strikes Ports, Ukraine’s Farmers Scramble to Keep Exporting';
 
   ngOnInit(): void {
     this.loading = true;

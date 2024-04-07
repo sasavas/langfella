@@ -5,11 +5,12 @@ import { ArticleService } from '../../shared/services/articles.service';
 import { LoadingComponent } from '../../shared/components/loading/loading.component';
 import { ChapterComponent } from './chapter/chapter.component';
 import { LogoBasicComponent } from '../../shared/components/logo-basic/logo-basic.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-reading',
   standalone: true,
-  imports: [LoadingComponent, ChapterComponent, LogoBasicComponent, RouterLink],
+  imports: [LoadingComponent, ChapterComponent, LogoBasicComponent, RouterLink, MatIconModule],
   templateUrl: './reading.component.html',
   styleUrl: './reading.component.scss',
 })

@@ -1,19 +1,23 @@
 <div class="translate_dialog">
     <div class="td_head">
-       <span></span> <mat-icon (click)="close()" class="material-icons-outlined ms-auto clickable" aria-hidden="false" fontIcon="close"></mat-icon>
-    </div>
-    <div class="td_content">
         <span>
             {{translateText}}
         </span>
-        <mat-icon class="material-icons-outlined ms-2 clickable" (click)="speakText()" fontIcon="volume_down_black"></mat-icon>
+        <mat-icon (click)="close()" class="material-icons-outlined ms-auto clickable" aria-hidden="false" fontIcon="close"></mat-icon>
     </div>
+    <!-- <div class="td_content">
+        <span>
+            {{translateText}}
+        </span>
+        <mat-icon (click)="close()" class="material-icons-outlined ms-auto clickable" aria-hidden="false" fontIcon="close"></mat-icon>
+    </div> -->    
     <ul class="td_results">
         <span>Turkish translation(s)</span>
         @if(translatedList.length){
             @for(item of translatedList; track $index){
                 <li class="translate">
-                    <mat-icon class="material-icons-outlined me-2 clickable" aria-hidden="false" fontIcon="add"></mat-icon> {{item}}
+                    <!-- <mat-icon (click)="addWord(item)" class="material-icons-outlined me-2 clickable" aria-hidden="false" fontIcon="add"></mat-icon>  -->
+                    {{item}}
                 </li>
             }
         }@else{
@@ -36,6 +40,13 @@
                 known
             </div>
         </div>
-
+    </div>
+    <div class="actions">
+        <mat-icon class="material-icons-outlined clickable" (click)="speakText()" fontIcon="volume_down_black"></mat-icon>
+        <div (click)="addWord()" class="add_icon ms-auto">
+            <mat-icon class="material-icons-outlined me-1 clickable" aria-hidden="false" fontIcon="add"></mat-icon>
+            Add to Words
+        </div>
+        
     </div>
 </div>

@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
 import { LogoBasicComponent } from '../../../shared/components/logo-basic/logo-basic.component';
 import { TranslateDialogComponent } from '../../translate-dialog/translate-dialog.component';
 import { CommonModule } from '@angular/common';
 import { TranslationService } from '../../../shared/services/translations.service';
 import { MatIconModule } from '@angular/material/icon';
+import { UserWord } from '../../../shared/models/word';
 @Component({
   selector: 'app-chapter',
   standalone: true,
@@ -16,27 +17,31 @@ export class ChapterComponent {
   @Input() sourceLanguage: any;
   @Output() closingEvent = new EventEmitter<boolean>();
 
-
-
+  @ViewChildren('sectionRef') sections: QueryList<ElementRef> | undefined;
+  currentSectionIndex: number | null = null;
 
   translation: any = null;
   translated: any = null;
+  userWord: UserWord = {};
   clickActive: boolean = false;
   OS: any = null
   error: any;
 
   translationDialog: boolean = false;
+  playingAudio: boolean = false;
 
   androidTranslation: any = null;
   maxCharAndroid: boolean = false;
   showAndroidTranslation: boolean = false;
 
   constructor(
+    private cdRef: ChangeDetectorRef,
     private translationService: TranslationService
   ) {}
 
   close() {
     this.closingEvent.emit(true);
+    window.speechSynthesis.cancel();
     console.log('selami');
   }
 
@@ -44,6 +49,9 @@ export class ChapterComponent {
     this.getOS();
     if(this.OS == 'Android'){
       document.addEventListener('selectionchange', this.handleSelectionChange);
+    }
+    for(let section of this.chapterData.contents){
+        section.content = section.content.replace(/\n/g,' ')
     }
   }
 
@@ -53,6 +61,7 @@ export class ChapterComponent {
 
     this.translation = null;
     this.translated = null;
+    this.userWord = {};
     this.clickActive = false;
   
     this.androidTranslation = null;
@@ -77,11 +86,19 @@ export class ChapterComponent {
       }else{
         if (event instanceof TouchEvent && event.changedTouches.length > 0) {
           // alert("touch");
-          this.translation = s.toString();
+          this.translation = s.toString().replace(/["“”]/g, '');
           this.translationService.getTranslation(this.translation, this.sourceLanguage, "tr").subscribe({
             next: (response) => {
               console.log(response);
               this.translated = response;
+              this.userWord = {
+                text: this.translation,
+                sourceLanguageCode: this.sourceLanguage,
+                targetLanguageCode: "tr",
+                translations: this.translated,
+                exampleSentence: this.translation,
+                familiarityLevel: "New",
+              }
             },
             error: (err) => {
               //TO DO: SWITCH CASE ALL ERRORS
@@ -149,11 +166,19 @@ export class ChapterComponent {
           .toString()
           .trim()
           .replace(/[.,;"]/g, '');
-          this.translation = str;
+          this.translation = str.replace(/["“”]/g, '');
           this.translationService.getTranslation(this.translation, this.sourceLanguage, "tr").subscribe({
             next: (response) => {
               console.log(response);
               this.translated = response;
+              this.userWord = {
+                text: this.translation,
+                sourceLanguageCode: this.sourceLanguage,
+                targetLanguageCode: "tr",
+                translations: this.translated,
+                exampleSentence: this.translation,
+                familiarityLevel: "New",
+              }
             },
             error: (err) => {
               //TO DO: SWITCH CASE ALL ERRORS
@@ -182,7 +207,7 @@ export class ChapterComponent {
         this.maxCharAndroid = true;
         this.translation = "The maximum character length for translation is 25";
       }else{
-        const selectedText = selection.toString();
+        const selectedText = selection.toString().replace(/["“”]/g, '');
         this.translation = selectedText;
         this.maxCharAndroid = false;
       }
@@ -198,6 +223,14 @@ export class ChapterComponent {
       next: (response) => {
         console.log(response);
         this.translated = response;
+        this.userWord = {
+          text: this.translation,
+          sourceLanguageCode: this.sourceLanguage,
+          targetLanguageCode: "tr",
+          translations: this.translated,
+          exampleSentence: this.translation,
+          familiarityLevel: "New",
+        }
       },
       error: (err) => {
         //TO DO: SWITCH CASE ALL ERRORS
@@ -246,52 +279,64 @@ export class ChapterComponent {
     }
     this.translation = null;
     this.translated = null;
+    this.userWord = {};
     this.androidTranslation = null;
     this.showAndroidTranslation = false;
   }
 
-  seslendirMetin() {
-    const speechSynthesis = window.speechSynthesis;
-    for(let section of this.chapterData.contents){
-      const soylem = new SpeechSynthesisUtterance(section.content);
-      soylem.rate = .8;
-      soylem.lang = 'en-US'; // Dil ayarı
-      speechSynthesis.speak(soylem);
-    }
+  stopSpeakText(){
+    window.speechSynthesis.pause();
+    this.playingAudio = false;
   }
 
-  speachText() {
+  speakText(): void {
     const speakSection = (index = 0) => {
-      if (index >= this.chapterData.contents.length) return; // Tüm bölümler tamamlandı
-  
+      if (index >= this.chapterData.contents.length) {
+        this.currentSectionIndex = null;
+        this.playingAudio = false
+        return;
+      }
+      this.playingAudio = true
+      this.currentSectionIndex = index;
+      this.scrollToCurrentSection();
+      this.cdRef.detectChanges(); // Değişiklik algılama döngüsünü manuel olarak tetikleyin
+
       const section = this.chapterData.contents[index];
-      const cumleler = section.content.split(/(?<=[.?!;])\s/);
-      let cumleIndex = 0;
-  
+      const sentences = section.content.split(/(?<=[.?!;])\s/);
+      let sentenceIndex = 0;
+
       const speakSentence = () => {
-        if (cumleIndex >= cumleler.length) {
-          speakSection(index + 1); // Bu bölüm tamamlandı, bir sonraki bölüme geç
+        if (sentenceIndex >= sentences.length) {
+          speakSection(index + 1);
           return;
         }
-  
-        const cumle = cumleler[cumleIndex];
-        const soylem = new SpeechSynthesisUtterance(cumle);
-        soylem.rate = .8;
-        soylem.lang = 'en-US';
-  
-        soylem.onend = () => {
+
+        const sentence = sentences[sentenceIndex];
+        const utterance = new SpeechSynthesisUtterance(sentence);
+        utterance.lang = 'en-US';
+        utterance.rate = .8;
+        utterance.lang = 'en-US'; // Dil ayarı
+
+        utterance.onend = () => {
           setTimeout(() => {
-            cumleIndex++;
-            speakSentence(); // Bir sonraki cümleyi seslendir
-          }, 500); // 500 milisaniye bekleyin
+            sentenceIndex++;
+            speakSentence();
+          }, 500);
         };
-  
-        window.speechSynthesis.speak(soylem);
+
+        window.speechSynthesis.speak(utterance);
       };
-  
-      speakSentence(); // Bu bölümün ilk cümlesini seslendir
+
+      speakSentence();
     };
-  
-    speakSection(); // İlk bölümü seslendir
+
+    speakSection();
+  }
+
+  scrollToCurrentSection(): void {
+    if (this.currentSectionIndex !== null) {
+      const sectionElement = this.sections?.toArray()[this.currentSectionIndex].nativeElement;
+      sectionElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
   }
 }

@@ -2,7 +2,19 @@
     <div class="header">
         <app-logo-basic class="logo"></app-logo-basic>
 
-        <div (click)="close()" class="logout clickable ms-auto">Back to book</div>
+        <div (click)="close()" class="logout clickable"><mat-icon class="material-icons-outlined ms-2 me-1" aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back"></mat-icon> Back to book</div>
+        @if(playingAudio){
+            <button (click)="stopSpeakText()" mat-raised-button class="ea_button justify-content-center ms-auto bg_tertiary c_white">
+                <mat-icon class="material-icons-outlined me-2" aria-hidden="false" aria-label="Example home icon" fontIcon="stop_circle"></mat-icon>
+                Stop audio
+            </button>
+        }@else{
+            <button (click)="speakText()" mat-raised-button class="ea_button justify-content-center ms-auto bg_tertiary c_white">
+                <mat-icon class="material-icons-outlined me-2" aria-hidden="false" aria-label="Example home icon" fontIcon="play_circle"></mat-icon>
+                Start audio
+            </button>
+        }
+
     </div>
 
     <div class="d-flex">
@@ -14,120 +26,120 @@
 
     </div>
 
-    <button (click)="speachText()" mat-raised-button class="ea_button justify-content-center bg_tertiary c_white">
-        <mat-icon class="material-icons-outlined" aria-hidden="false" aria-label="Example home icon" fontIcon="volume_down"></mat-icon>
-        Audio
-        
-    </button>
-
     @if(OS == 'Windows' || OS == 'MacOS' ||  OS == 'Linux'){
         @for (section of chapterData.contents; track $index) {
-            @if (section.tag == 'p') {
-                <p class="my-2 lang-cont p" (click)="getClickedWord($event)">
-                   {{section.content}}
-                </p>
-            }@else if (section.tag == 'h1') {
-                <h2 class="my-2 lang-cont" (click)="getClickedWord($event)">
-                  {{section.content}}
-                </h2>
-            }@else if (section.tag == 'h2') {
-                <h2 class="my-2 lang-cont" (click)="getClickedWord($event)">
-                  {{section.content}}
-                </h2>
-            }@else if (section.tag == 'h3') {
-                <h3 class="my-2 lang-cont" (click)="getClickedWord($event)">
-                   {{section.content}}
-                </h3>
-            }@else if (section.tag == 'h4') {
-                <h4 class="my-2 lang-cont" (click)="getClickedWord($event)">
-                  {{section.content}}
-                </h4>
-            }@else if (section.tag == 'h5') {
-                <h5 class="my-2 lang-cont" (click)="getClickedWord($event)">
-                  {{section.content}}
-                </h5>
-            }
-            @else if (section.tag == 'h6') {
-                <h6 class="my-2 lang-cont" (click)="getClickedWord($event)">
-                  {{section.content}}
-                </h6>
-            }
+            <div #sectionRef [ngClass]="{'readingNow': $index == currentSectionIndex && playingAudio}">
+                @if (section.tag == 'p') {
+                    <p class="my-2 lang-cont p" (click)="getClickedWord($event)">
+                    {{section.content}}
+                    </p>
+                }@else if (section.tag == 'h1') {
+                    <h2 class="my-2 lang-cont" (click)="getClickedWord($event)">
+                    {{section.content}}
+                    </h2>
+                }@else if (section.tag == 'h2') {
+                    <h2 class="my-2 lang-cont" (click)="getClickedWord($event)">
+                    {{section.content}}
+                    </h2>
+                }@else if (section.tag == 'h3') {
+                    <h3 class="my-2 lang-cont" (click)="getClickedWord($event)">
+                    {{section.content}}
+                    </h3>
+                }@else if (section.tag == 'h4') {
+                    <h4 class="my-2 lang-cont" (click)="getClickedWord($event)">
+                    {{section.content}}
+                    </h4>
+                }@else if (section.tag == 'h5') {
+                    <h5 class="my-2 lang-cont" (click)="getClickedWord($event)">
+                    {{section.content}}
+                    </h5>
+                }
+                @else if (section.tag == 'h6') {
+                    <h6 class="my-2 lang-cont" (click)="getClickedWord($event)">
+                    {{section.content}}
+                    </h6>
+                }
+            </div>
         }
     }@else if(OS == 'ipadOS' || OS == 'iOS'){
         @for (section of chapterData.contents; track $index) {
-            @if (section.tag == 'p') {
-                <p class="my-2 lang-cont p" (touchend)="getClickedWord($event)">
-                   {{section.content}}
-                </p>
-            }@else if (section.tag == 'h1') {
-                <h2 class="my-2 lang-cont" (touchend)="getClickedWord($event)">
-                  {{section.content}}
-                </h2>
-            }@else if (section.tag == 'h2') {
-                <h2 class="my-2 lang-cont" (touchend)="getClickedWord($event)">
-                  {{section.content}}
-                </h2>
-            }@else if (section.tag == 'h3') {
-                <h3 class="my-2 lang-cont" (touchend)="getClickedWord($event)">
-                   {{section.content}}
-                </h3>
-            }@else if (section.tag == 'h4') {
-                <h4 class="my-2 lang-cont" (touchend)="getClickedWord($event)">
-                  {{section.content}}
-                </h4>
-            }@else if (section.tag == 'h5') {
-                <h5 class="my-2 lang-cont" (touchend)="getClickedWord($event)">
-                  {{section.content}}
-                </h5>
-            }
-            @else if (section.tag == 'h6') {
-                <h6 class="my-2 lang-cont"  (touchend)="getClickedWord($event)">
-                  {{section.content}}
-                </h6>
-            }
+            <div #sectionRef [ngClass]="{'readingNow': $index == currentSectionIndex && playingAudio}">
+                @if (section.tag == 'p') {
+                    <p class="my-2 lang-cont p" (touchend)="getClickedWord($event)">
+                    {{section.content}}
+                    </p>
+                }@else if (section.tag == 'h1') {
+                    <h2 class="my-2 lang-cont" (touchend)="getClickedWord($event)">
+                    {{section.content}}
+                    </h2>
+                }@else if (section.tag == 'h2') {
+                    <h2 class="my-2 lang-cont" (touchend)="getClickedWord($event)">
+                    {{section.content}}
+                    </h2>
+                }@else if (section.tag == 'h3') {
+                    <h3 class="my-2 lang-cont" (touchend)="getClickedWord($event)">
+                    {{section.content}}
+                    </h3>
+                }@else if (section.tag == 'h4') {
+                    <h4 class="my-2 lang-cont" (touchend)="getClickedWord($event)">
+                    {{section.content}}
+                    </h4>
+                }@else if (section.tag == 'h5') {
+                    <h5 class="my-2 lang-cont" (touchend)="getClickedWord($event)">
+                    {{section.content}}
+                    </h5>
+                }
+                @else if (section.tag == 'h6') {
+                    <h6 class="my-2 lang-cont"  (touchend)="getClickedWord($event)">
+                    {{section.content}}
+                    </h6>
+                }
+            </div>
         }
     }@else if(OS == 'Android'){
         @for (section of chapterData.contents; track $index) {
-            @if (section.tag == 'p') {
-                <p class="my-2 lang-cont p" oncontextmenu="event.preventDefault()">
-                   {{section.content}}
-                </p>
-            }@else if (section.tag == 'h1') {
-                <h2 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
-                  {{section.content}}
-                </h2>
-            }@else if (section.tag == 'h2') {
-                <h2 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
-                  {{section.content}}
-                </h2>
-            }@else if (section.tag == 'h3') {
-                <h3 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
-                   {{section.content}}
-                </h3>
-            }@else if (section.tag == 'h4') {
-                <h4 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
-                  {{section.content}}
-                </h4>
-            }@else if (section.tag == 'h5') {
-                <h5 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
-                  {{section.content}}
-                </h5>
-            }
-            @else if (section.tag == 'h6') {
-                <h6 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
-                  {{section.content}}
-                </h6>
-            }
+            <div #sectionRef [ngClass]="{'readingNow': $index == currentSectionIndex && playingAudio}">
+                @if (section.tag == 'p') {
+                    <p class="my-2 lang-cont p" oncontextmenu="event.preventDefault()">
+                    {{section.content}}
+                    </p>
+                }@else if (section.tag == 'h1') {
+                    <h2 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
+                    {{section.content}}
+                    </h2>
+                }@else if (section.tag == 'h2') {
+                    <h2 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
+                    {{section.content}}
+                    </h2>
+                }@else if (section.tag == 'h3') {
+                    <h3 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
+                    {{section.content}}
+                    </h3>
+                }@else if (section.tag == 'h4') {
+                    <h4 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
+                    {{section.content}}
+                    </h4>
+                }@else if (section.tag == 'h5') {
+                    <h5 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
+                    {{section.content}}
+                    </h5>
+                }
+                @else if (section.tag == 'h6') {
+                    <h6 class="my-2 lang-cont" oncontextmenu="event.preventDefault()">
+                    {{section.content}}
+                    </h6>
+                }
+            </div>
         }
     }
 
 }
 @if (translation && OS !== 'Android') {
-    <app-translate-dialog [ngClass]="OS == 'Android' || OS == 'iOS' ? 'mobile' : 'web'" (closingEvent)="closeTranslate()" [translatedText]="translated" [translateText]="translation"></app-translate-dialog>
+    <app-translate-dialog [ngClass]="OS == 'Android' || OS == 'iOS' ? 'mobile' : 'web'" (closingEvent)="closeTranslate()" [translatedText]="translated" [userWord]="userWord" [translateText]="translation"></app-translate-dialog>
 }
 
 @if (androidTranslation && showAndroidTranslation) {
-    <app-translate-dialog [ngClass]="OS == 'Android' || OS == 'iOS' ? 'mobile' : 'web'" (closingEvent)="closeTranslate()" [translatedText]="translated" [translateText]="androidTranslation"></app-translate-dialog>
+    <app-translate-dialog [ngClass]="OS == 'Android' || OS == 'iOS' ? 'mobile' : 'web'" (closingEvent)="closeTranslate()" [translatedText]="translated" [userWord]="userWord" [translateText]="androidTranslation"></app-translate-dialog>
 }
 
 @if (translation && OS == 'Android'){
