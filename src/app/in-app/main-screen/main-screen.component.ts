@@ -38,6 +38,7 @@ export class MainScreenComponent {
       next: (response) => {
         console.log(response);
         this.articlesLibrary = response;
+        this.loading = false;
       },
       error: (err) => {
         //TO DO: SWITCH CASE ALL ERRORS
