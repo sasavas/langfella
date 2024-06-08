@@ -129,8 +129,6 @@ export class AuthService {
       headers: headers,
     };
 
-    console.log("verificationCode", { verificationCode });
-
     return this.http.post<any>(request.url, { verificationCode }, {
       headers: request.headers,
     });
