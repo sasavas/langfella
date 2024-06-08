@@ -13,6 +13,8 @@ import serviceConfig from './service-config';
   providedIn: 'root',
 })
 export class AuthService {
+  private resetLink = `${serviceConfig.baseUrl}/Users/resetPassword`;
+  private verifyPassLink = `${serviceConfig.baseUrl}/Users/verifyPasswordReset`;
   private verifyLink = `${serviceConfig.baseUrl}/Users/verify`;
   private registerlink = `${serviceConfig.baseUrl}/Users/register`;
   private loginlink = `${serviceConfig.baseUrl}/Users/login`;
@@ -23,19 +25,6 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('user') || '{}')._jwt;
   }
   constructor(private http: HttpClient, private router: Router) {}
-
-  // register(email: string, password: string){
-  //     return this.http.post<any>(this.registerlink, {
-  //         email: email,
-  //         password: password,
-  //         returnSecureToken: true
-  //     }).pipe(
-  //         tap(response => {
-  //             this.handleUser(response.email, response.localId, response.idToken, response.expiresIn);
-  //         }),
-  //         catchError(this.rhandleError)
-  //     )
-  // }
 
   logout() {
     let headers = new HttpHeaders({
@@ -50,6 +39,45 @@ export class AuthService {
       }));
   }
 
+  resetPassword(email:string){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    var request = {
+      url: this.resetLink,
+      headers: headers,
+    };
+
+    return this.http.get<any>(request.url+"/"+email, {
+      headers: request.headers,
+    }).pipe(
+      catchError(this.rhandleError),
+    );
+  }
+
+  verifyPasswordReset(code: string, newPassword: string){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    let obj = {
+      code,
+      newPassword
+    };
+
+    var request = {
+      url: this.verifyPassLink,
+      headers: headers,
+    };
+
+    return this.http.post<any>(request.url, obj, {
+      headers: request.headers,
+    }).pipe(
+      catchError(this.rhandleError),
+    );
+  }
+
   login(email: string, password: string) {
     return this.http
       .post<any>(this.loginlink, {
@@ -57,10 +85,10 @@ export class AuthService {
         password: password,
       })
       .pipe(
+        catchError(this.rhandleError),
         tap((response) => {
           this.handleUser(email, response.userId, response.jwt);
-        }),
-        catchError(this.rhandleError)
+        })
       );
   }
 
@@ -83,7 +111,12 @@ export class AuthService {
 
     console.log(user);
 
-    return this.http.post<any>(request.url, user, { headers: request.headers });
+    return this.http.post<any>(request.url, user, { headers: request.headers }).pipe(
+      tap((response) => {
+        this.handleUser(email, response.userId, response.jwt);
+      }),
+      catchError(this.rhandleError)
+    );
   }
 
   verify(veridicationCode: string) {
@@ -138,17 +171,14 @@ export class AuthService {
     }
   }
 
-  private rhandleError(err: HttpErrorResponse) {
-    let message = 'An error occurred';
-
-    return throwError(() => message);
+  private rhandleError(error: HttpErrorResponse) {
+    if(error.error){
+      return throwError(() => error.error.detail);
+    } else {
+      let errorMessage = 'An unknown error occured';
+      return throwError(() => errorMessage);
+    }
   }
-
-  // private lhandleError(err: HttpErrorResponse) {
-  //     let message = "Wrong mail address or password"
-
-  //     return throwError(() => message)
-  // }
 
   private handleUser(email: string, userId: string, jwt: string) {
     const user = new User(email, userId, jwt);

@@ -1,4 +1,4 @@
-<h5 class="mb-2">
+<h5>
   Login
 </h5>
 <form class="example-form">
@@ -25,7 +25,13 @@
       </mat-form-field>
       <button mat-raised-button class="ea_button bg_tertiary c_white" color="primary" (click)="submit()">Submit</button>
 </form>
-<div class="d-flex my-4">
+
+<div class="d-flex forgot">
+  <span>Forgot your password?</span>
+  <a [routerLink]="['/lobby/resetPassword/reset']" routerLinkActive="router-link-active"  class="ms-auto">Reset password</a>
+</div>
+
+<div class="d-flex forgot">
   <span>Don't have a registered user?</span>
   <a [routerLink]="['/lobby/signup']" routerLinkActive="router-link-active"  class="ms-auto">Sign up</a>
 </div>

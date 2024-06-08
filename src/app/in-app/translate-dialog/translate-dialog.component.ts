@@ -64,8 +64,8 @@ export class TranslateDialogComponent {
       },
       error: (err) => {
         //TO DO: SWITCH CASE ALL ERRORS
-        this.error = err;
-        alert(err);
+        this.error = err.detail;
+        alert(this.error);
       }
     });
   }

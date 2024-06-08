@@ -1,14 +1,6 @@
 :host{
     font-family: "Source Serif 4", serif;
 
-    .header{
-        position: sticky;
-        top: 0px;
-        padding: 0;
-        z-index: 2;
-    
-    }
-
     .words{
         margin-top: 20px;
         list-style: none;
@@ -19,7 +11,7 @@
             display: flex;
             flex-direction: column;
             border-bottom: 1px solid var(--separation-1);
-            padding: 20px 12px;
+            padding: 20px 0;
 
             .text{
                 align-items: center;
@@ -43,7 +35,7 @@
     }
 
     .playCard{
-        position: absolute;
+        position: fixed;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -102,4 +94,18 @@
             }
         }
     }
+}
+
+@media (max-width:912px) {
+    :host{
+        padding: 0 16px;
+    }
+}
+
+.header{
+    position: sticky;
+    top: 0px;
+    padding: 0;
+    z-index: 2;
+
 }

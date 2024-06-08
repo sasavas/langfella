@@ -9,6 +9,7 @@ import { SignUpComponent } from './onboarding/sign-up/sign-up.component';
 import { ReadingComponent } from './in-app/reading/reading.component';
 import { SiteComponent } from './onboarding/site/site.component';
 import { VerificationComponent } from './onboarding/verification/verification.component';
+import { ResetPasswordComponent } from './onboarding/reset-password/reset-password.component';
 
 export const routes: Routes = [
   {
@@ -35,7 +36,8 @@ export const routes: Routes = [
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignUpComponent },
-      { path: 'verification/:verifyId', component: VerificationComponent }
+      { path: 'verification/:verifyId', component: VerificationComponent },
+      { path: 'resetPassword/:verificationCode', component: ResetPasswordComponent },
     ],
   },
 ];

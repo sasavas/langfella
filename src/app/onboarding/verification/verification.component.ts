@@ -33,8 +33,8 @@ export class VerificationComponent {
         },
         error: (err) => {
           //TO DO: SWITCH CASE ALL ERRORS
-          console.log(err);
-          this.error = err;
+          this.error = err.detail;
+          alert(this.error);
           this.loading = false;
         }
       })

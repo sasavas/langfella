@@ -50,10 +50,10 @@ export class LoginComponent {
       next: (response) => {
         this.router.navigate(['/app'])
         this.loading = false;
+        console.log(response);
       },
       error: (err) => {
         //TO DO: SWITCH CASE ALL ERRORS
-        this.error = err;
         alert(err);
         this.loading = false;
       }

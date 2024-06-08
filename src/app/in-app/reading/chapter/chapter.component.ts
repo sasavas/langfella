@@ -102,8 +102,8 @@ export class ChapterComponent {
             },
             error: (err) => {
               //TO DO: SWITCH CASE ALL ERRORS
-              this.error = err;
-              alert(err);
+              this.error = err.detail;
+              alert(this.error);
             }
           });
           setTimeout(() => {
@@ -182,8 +182,8 @@ export class ChapterComponent {
             },
             error: (err) => {
               //TO DO: SWITCH CASE ALL ERRORS
-              this.error = err;
-              alert(err);
+              this.error = err.detail;
+              alert(this.error);
             }
           });
           window.getSelection()?.removeAllRanges();
@@ -234,8 +234,8 @@ export class ChapterComponent {
       },
       error: (err) => {
         //TO DO: SWITCH CASE ALL ERRORS
-        this.error = err;
-        alert(err);
+        this.error = err.detail;
+        alert(this.error);
       }
     });
     this.showAndroidTranslation = true;

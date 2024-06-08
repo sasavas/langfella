@@ -1,0 +1,8 @@
+.forgot{
+    font-size: 14px;
+    padding: 24px 0;
+
+    &:first-of-type{
+        border-bottom: 1px solid var(--separation-1);
+    }
+}
