@@ -119,7 +119,7 @@ export class AuthService {
     );
   }
 
-  verify(veridicationCode: string) {
+  verify(verificationCode: string) {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -129,9 +129,9 @@ export class AuthService {
       headers: headers,
     };
 
-    console.log(veridicationCode);
+    console.log("verificationCode", { verificationCode });
 
-    return this.http.post<any>(request.url, veridicationCode, {
+    return this.http.post<any>(request.url, { verificationCode }, {
       headers: request.headers,
     });
   }
