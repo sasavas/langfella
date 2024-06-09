@@ -25,10 +25,12 @@ export class TranslateDialogComponent {
   translatedList: any[] = [];
 
 	ngOnChanges(changes: SimpleChanges) {
-    if (changes.translatedText.currentValue) {
-      this.translatedList = [];
-      this.translatedList = [...new Set(changes.translatedText.currentValue.map((v: TranslationResult) => v.translation))];
-		}
+    if (changes.translatedText) {
+      if(this.translatedText !== null){
+        this.translatedList = [];
+        this.translatedList = [...new Set(this.translatedText.map(t => t.translation))];
+      }
+    }
 	}
 
   speakText(): void {
