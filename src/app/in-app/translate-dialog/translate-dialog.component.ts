@@ -25,7 +25,7 @@ export class TranslateDialogComponent {
   translatedList: any[] = [];
 
 	ngOnChanges(changes: SimpleChanges) {
-    if (changes.translatedText.currentValue.length) {
+    if (changes.translatedText.currentValue) {
       this.translatedList = [];
       this.translatedList = [...new Set(changes.translatedText.currentValue.map((v: TranslationResult) => v.translation))];
 		}
