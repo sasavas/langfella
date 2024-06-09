@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, 	SimpleChanges} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { WordsService } from '../../shared/services/words.service';
-import { UserWord } from '../../shared/models/word';
+import { TranslationResult, UserWord } from '../../shared/models/word';
 
 @Component({
   selector: 'app-translate-dialog',
@@ -15,7 +15,7 @@ export class TranslateDialogComponent {
   @Output() closingEvent = new EventEmitter<boolean>();
   @Input() userWord: UserWord = {}
   @Input() translateText: string = "";
-  @Input() translatedText: any;
+  @Input() translatedText: TranslationResult[] = [];
 
   constructor(
     private wordService: WordsService
@@ -25,22 +25,11 @@ export class TranslateDialogComponent {
   translatedList: any[] = [];
 
 	ngOnChanges(changes: SimpleChanges) {
-		if (changes.translatedText) {
-      if(this.translatedText !== null){
-        this.translatedList = [];
-        for(let item of this.translatedText){
-          this.translatedList.push(item.translations)
-        }
-        this.translatedList = [...new Set(this.translatedList)];
-      }
+    if (changes.translatedText.currentValue.length) {
+      this.translatedList = [];
+      this.translatedList = [...new Set(changes.translatedText.currentValue.map((v: TranslationResult) => v.translation))];
 		}
 	}
-
-  ngOnDestroy(){
-    this.translateText = "";
-    this.translatedText = null;
-    this.translatedList = [];
-  }
 
   speakText(): void {
     if ('speechSynthesis' in window) {
@@ -74,7 +63,7 @@ export class TranslateDialogComponent {
   close() {
 		this.closingEvent.emit(true);
     this.translateText = "";
-    this.translatedText = null;
+    this.translatedText = [];
     this.translatedList = [];
 	}
 }

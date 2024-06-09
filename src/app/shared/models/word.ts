@@ -6,3 +6,8 @@ export interface UserWord {
     exampleSentence?: string;
     familiarityLevel?: string;
   }
+
+  export interface TranslationResult {
+    translatorName: string;
+    translation: string;
+  }
