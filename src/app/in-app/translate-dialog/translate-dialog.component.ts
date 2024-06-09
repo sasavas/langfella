@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, 	SimpleChanges} from '@angular/core';
+import { Component, EventEmitter, Input, MissingTranslationStrategy, Output, 	SimpleChanges} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { WordsService } from '../../shared/services/words.service';
 import { TranslationResult, UserWord } from '../../shared/models/word';
@@ -25,11 +25,9 @@ export class TranslateDialogComponent {
   translatedList: any[] = [];
 
 	ngOnChanges(changes: SimpleChanges) {
-    if (changes.translatedText) {
-      if(this.translatedText !== null){
-        this.translatedList = [];
-        this.translatedList = [...new Set(this.translatedText.map(t => t.translation))];
-      }
+    this.translatedList = [];
+    if (changes.translatedText?.currentValue) {
+        this.translatedList = [...new Set(changes.translatedText.currentValue.map((t: TranslationResult) => t.translation))];
     }
 	}
 
