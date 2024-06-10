@@ -107,17 +107,13 @@ export class ChapterComponent {
     this.translated = null;
     this.userWord = {};
     this.clickActive = false;
-  
+
     this.androidTranslation = null;
     this.maxCharAndroid = false;
     this.showAndroidTranslation = false;
 
     window.speechSynthesis.cancel();
-
-    
   }
-
-
 
   getClickedWord(event: MouseEvent | TouchEvent): void {
     let s = window.getSelection();
@@ -162,7 +158,7 @@ export class ChapterComponent {
         let endOffset = range.endOffset;
         let startNode: any = node;
         let endNode: any = node;
- 
+
        //  Find start node and offset
         while (startOffset > 0 && startNode.textContent[startOffset - 1] != ' ') {
           startOffset -= 1;
@@ -178,7 +174,7 @@ export class ChapterComponent {
             startOffset = startNode.textContent.length;
           }
         }
- 
+
        //  Find end node and offset
         while (
           endOffset < node.textContent.length &&
@@ -211,7 +207,6 @@ export class ChapterComponent {
           this.translation = str.replace(/["“”]/g, '');
           this.translationService.getTranslation(this.translation, this.sourceLanguage, "tr").subscribe({
             next: (response) => {
-              console.log(response);
               this.translated = response;
               this.userWord = {
                 text: this.translation,
@@ -298,7 +293,7 @@ export class ChapterComponent {
         windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
         iosPlatforms = ['iPhone', 'iPod'],
         ipadOsPlatforms = ['iPad'];
-  
+
     if (macosPlatforms.indexOf(platform) !== -1) {
       this.OS = 'MacOS';
     } else if (iosPlatforms.indexOf(platform) !== -1) {
