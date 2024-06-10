@@ -20,6 +20,8 @@ export class ChapterComponent {
   @ViewChildren('sectionRef') sections: QueryList<ElementRef> | undefined;
   currentSectionIndex: number | null = null;
 
+  bookmark: string = '';
+
   translation: any = null;
   translated: any = null;
   userWord: UserWord = {};
@@ -36,7 +38,8 @@ export class ChapterComponent {
 
   constructor(
     private cdRef: ChangeDetectorRef,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private el: ElementRef
   ) {}
 
   close() {
@@ -55,6 +58,47 @@ export class ChapterComponent {
     }
   }
 
+  getVisibleElements(): string[] {
+    const container = document.getElementsByClassName('app_body')[0];
+    if (!container) {
+        return [];
+    }
+
+    const visibleElements: string[] = [];
+    const children = container.getElementsByClassName('lang-cont');
+    const containerRect = container.getBoundingClientRect();
+
+    for (let i = 0; i < children.length; i++) {
+        const child = children[i] as HTMLElement;
+        const childRect = child.getBoundingClientRect();
+
+        if (
+            childRect.top >= containerRect.top &&
+            childRect.bottom <= containerRect.bottom
+        ) {
+            visibleElements.push(child.id);
+        }
+    }
+
+    return visibleElements;
+  }
+
+  addScrollListener() {
+    const container = document.getElementsByClassName('app_body')[0];
+    if (!container) {
+        return;
+    }
+
+    container.addEventListener('scroll', () => {
+        const visibleElements = this.getVisibleElements();
+        this.bookmark = visibleElements[0];
+    });
+  }
+
+  ngAfterViewInit(){
+    this.addScrollListener();
+  }
+
   ngOnDestroy() {
     // Event listener'ı temizle
     document.removeEventListener('selectionchange', this.handleSelectionChange);
@@ -69,12 +113,10 @@ export class ChapterComponent {
     this.showAndroidTranslation = false;
 
     window.speechSynthesis.cancel();
-  }
 
-
-  test(){
     
   }
+
 
 
   getClickedWord(event: MouseEvent | TouchEvent): void {

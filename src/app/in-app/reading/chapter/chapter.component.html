@@ -30,7 +30,7 @@
         @for (section of chapterData.contents; track $index) {
             <div #sectionRef [ngClass]="{'readingNow': $index == currentSectionIndex && playingAudio}">
                 @if (section.tag == 'p') {
-                    <p class="my-2 lang-cont p" (click)="getClickedWord($event)">
+                    <p [id]="section.id" class="my-2 lang-cont p" (click)="getClickedWord($event)">
                     {{section.content}}
                     </p>
                 }@else if (section.tag == 'h1') {
@@ -65,7 +65,7 @@
         @for (section of chapterData.contents; track $index) {
             <div #sectionRef [ngClass]="{'readingNow': $index == currentSectionIndex && playingAudio}">
                 @if (section.tag == 'p') {
-                    <p class="my-2 lang-cont p" (touchend)="getClickedWord($event)">
+                    <p [id]="section.id" class="my-2 lang-cont p" (touchend)="getClickedWord($event)">
                     {{section.content}}
                     </p>
                 }@else if (section.tag == 'h1') {
@@ -100,7 +100,7 @@
         @for (section of chapterData.contents; track $index) {
             <div #sectionRef [ngClass]="{'readingNow': $index == currentSectionIndex && playingAudio}">
                 @if (section.tag == 'p') {
-                    <p class="my-2 lang-cont p" oncontextmenu="event.preventDefault()">
+                    <p [id]="section.id" class="my-2 lang-cont p" oncontextmenu="event.preventDefault()">
                     {{section.content}}
                     </p>
                 }@else if (section.tag == 'h1') {
